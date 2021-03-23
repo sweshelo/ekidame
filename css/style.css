@@ -1,0 +1,76 @@
+body {
+    margin : 5px;
+    padding : 10px;
+}
+
+p {
+    margin : 5px;
+    padding: 5px;
+}
+
+h2{
+    margin  : 5px;
+    padding : 5px;
+}
+
+#denco-selector{
+}
+
+.face{
+    text-align : center;
+    width  : 38px;
+    height : 38px;
+    padding : 2px;
+    float:left;
+}
+
+.select{
+   border-radius : 50%;
+   width   : 35px;
+   height  : 35px;
+   padding : 3px;
+
+   filter: drop-shadow(3px 3px 3px gray);
+}
+
+.clear{
+    clear : both;
+}
+
+.form input {
+    padding : 4px;
+    margin  : 3px;
+}
+
+.form li {
+    list-style : none;
+}
+
+.form label {
+    width : 150px;
+    float : left;
+}
+
+.formation_wrap{
+    background : rgb(240,240,240);
+    border-radius : 70px 10px 10px 10px;
+}
+
+.formation_wrap p{
+    padding : 0;
+    margin  : 0;
+    font-size : 0.8em;
+
+    padding-top  : 2px;
+    padding-left : 50px;
+}
+
+#attack {
+    height : 50px;
+    margin-left : 20px;
+}
+
+#block{
+    height : 50px;
+    margin-left : 20px;
+}
