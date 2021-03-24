@@ -14,7 +14,7 @@ var targ   = []
 var targ_e = [a_dencos, b_dencos]
 var currentEdit = 0
 
-var battle = [0, 0];
+var battle = [-1, -1];
 var result = [];
 
 //計算
@@ -24,7 +24,7 @@ calc.onclick = ()=>{getParam()};
 fill.onclick = ()=>{fillParam()};
 
 var req = new XMLHttpRequest();
-req.open("get", "https://dmats97.xyz/test/data/data.csv", true);
+req.open("get", "https://dmats97.xyz/ekidame/data/data.csv", true);
 req.send(null);
 
 req.onload = function(){
@@ -51,7 +51,7 @@ for(let i=0;i<2;i++){
 window.onload = ()=>{
     let baf = "";
     for(let i=0;i<100;i++){
-        if (i==17) continue;
+        //if (i==17) continue;
         baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select"></div>';
     }
     dencos.innerHTML = baf;
@@ -75,9 +75,27 @@ function getParam(){
 }
 
 function fillParam(){
+    if (battle[0]==-1){
+        alert('この機能はアタッカーとなるでんこを選択していた場合のみ利用できます。\n対象を選択するには、編成しているでんこのアイコンをクリックします。')
+        return -1;
+    }
+    if (battle[0]==0){
+        alert('「のぞみ」をアタッカーに指定することは出来ません。');
+        return -2;
+    }
+
     let e = document.getElementById('level_0_'+battle[0]);
-    console.log(battle[0],parseInt(e.value));
-    document.getElementById('init').value = result[battle[0]-1][parseInt(e.value)-1];
+    let level = parseInt(e.value);
+    if (level<1 || level>80){
+        alert('指定されたレベルが正常な値ではありません。');
+        return -3;
+    }
+    if (result[battle[0]-1][level-1]==0){
+        alert('申し訳ありません。\n指定されたでんこのパラメータ情報は現在存在しません。');
+        return -4
+    }
+
+    document.getElementById('init').value = result[battle[0]-1][level-1];
 }
 
 function calcDamage(_init, _atk, _blk, _const, _mioHP, _elem){
