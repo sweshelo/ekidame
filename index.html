@@ -1,43 +1,65 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
     </head>
     <body>
         <main>
-            <h2>でんこをえらぶ</h2>
-            <div id="denco_selector"></div>
-            <div class="clear"></div>
             <div class="wrapper">
-            <h2>攻撃側</h2>
-            <div class="formation_wrap">
-            <p>編成</p>
-            <div id="attack"></div>
-            </div>
-            <div class="form">
-                <ul>
-                    <li><label>AP</label><input type="number" id="init"></input></li>
-                    <li><label>ATK(単位%)</label><input type="number" id="atk"></input></li>
-                    <li><label>固定ダメージ</label><input type="number" id="upper"></input></li>
-                </ul>
-            </div>
-            </div>
-            <div class="wrapper">
-            <h2>防御側</h2>
-            <div class="formation_wrap">
-            <p>編成</p>
-            <div id="block"></div>
-            </div>
-            <div class="form">
-                <ul>
-                    <li><label>DEF(単位:%)</label><input type="number" id="def"></input></li>
-                    <li><label>ミオHP</label><input type="number" id="mio"></input></li>
-                    <li><label>固定値軽減</label><input type="number" id="downer"></input></li>
-                </ul>
-            </div>
-            </div>
-            <div class="clear"></div>
-            <button id="submit">計算</button>
+                <div class="section">
+                    <h2>駅メモダメージ計算ツール V0.0</h2>
+                    <p>
+                    駅メモのダメージを計算します。作者が面倒臭がって切り捨て処理をしていないので誤差が出ます。<br>
+                    あくまで目安としてご利用ください。
+                    </p>
+                    <h3>使い方</h3>
+                    <p>
+                    追加したい編成の車両をクリックしたあと、「でんこをえらぶ」から編成に組み込むでんこを選びます。<br>
+                    編成内のでんこアイコンをクリックすると赤くハイライトされます。ハイライトされたでんこがダメージを与える/受けるでんこになります。<br>
+                    チェックボックスにチェックを入れると、そのでんこはスキルを発動したものとして計算を行います。<br>
+                    入力欄に数字を入れると、そのでんこのレベルを個別に設定できます。スキルレベルもこのレベルに依存します。<br>
+                    </p>
+                </div>
+                <div class="section">
+                    <h2>でんこをえらぶ</h2>
+                    <div id="denco_selector"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="section">
+                    <h2>攻撃側</h2>
+                    <div class="formation_wrap" id="formation_a">
+                        <div id="attack"></div>
+                    </div>
+                    <div class="form">
+                        <table>
+                            <tr><td>AP</td><td><input type="number" id="init"></td></tr>
+                            <tr><td>ATK+DEF</td><td><input type="number" id="atk"></td></tr>
+                            <tr><td>固定ダメージ</td><td><input type="number" id="upper"></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>防御側</h2>
+                    <div class="formation_wrap" id="formation_b">
+                        <div id="block"></div>
+                    </div>
+                    <div class="form">
+                         <table>
+                             <tr><td>ATK+DEF</td><td><input type="number" id="def"></td></tr>
+                             <tr><td>固定値軽減</td><td><input type="number" id="downer"></td></tr>
+                             <tr class="hide" id="mio_row"><td>ミオHP</td><td><input type="number" id="mio"></td></tr>
+                        </table>
+                   </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="section">
+                    <div class="submit">
+                        <button id="fill">数値の自動入力</button>
+                        <button id="calc">計算</button>
+                    </div>
+                </div>
         </main>
     </body>
     <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>

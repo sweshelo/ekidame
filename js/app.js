@@ -1,53 +1,100 @@
-var button = document.getElementById('submit');
+var clac = document.getElementById('calc');
+var fill = document.getElementById('fill');
+
 var dencos = document.getElementById('denco_selector')
-button.onclick = ()=>{getParam()};
 
 var a_dencos = document.getElementById('attack');
 var b_dencos = document.getElementById('block');
 
 var attack = []
-var block = []
+var block  = []
 
-var targ = []
+var pointer = [attack, block]
+var targ   = []
 var targ_e = [a_dencos, b_dencos]
-
 var currentEdit = 0
-targ = attack
 
-window.onload = ()=>{
-    var baf = "";
-    for(i=0;i<100;i++){
-        if (i==17) continue;
-        //baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select"></div>';
+var battle = [0, 0];
+var result = [];
+
+//計算
+calc.onclick = ()=>{getParam()};
+
+//パラメータ取得
+fill.onclick = ()=>{fillParam()};
+
+var req = new XMLHttpRequest();
+req.open("get", "https://dmats97.xyz/test/data/data.csv", true);
+req.send(null);
+
+req.onload = function(){
+    let tmp = req.responseText.split("\n");
+    for(let i=0;i<tmp.length;i++){
+        result[i] = tmp[i].split(',');
     }
-    dencos.innerHTML = baf;
-    console.log(baf);
 }
 
-function getParam(){
-    init = document.getElementById("init").value;
-    atk  = document.getElementById("atk").value;
-    def  = document.getElementById("def").value;
+//編成選択
+let index = ['a', 'b'];
+for(let i=0;i<2;i++){
+    targ_e[i].onclick = ()=>{
+        currentEdit=i;
+        targ=pointer[i];
+        $('#formation_'+index[i]).addClass('selected');
+        $('#formation_'+index[i]).removeClass('unselected');
+        $('#formation_'+index[(i+1)%2]).addClass('unselected');
+        $('#formation_'+index[(i+1)%2]).removeClass('selected');
+    }
+}
 
-    up   = document.getElementById("upper").value;
-    down = document.getElementById("downer").value;
-    mio  = document.getElementById("mio").value;
+//でんこ一覧
+window.onload = ()=>{
+    let baf = "";
+    for(let i=0;i<100;i++){
+        if (i==17) continue;
+        baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select"></div>';
+    }
+    dencos.innerHTML = baf;
+    targ = attack;
+    $('#formation_a').addClass("selected");
+    $('#formation_b').addClass("unselected");
+    console.log(result);
+}
+
+
+function getParam(){
+    let init = document.getElementById("init").value;
+    let atk  = document.getElementById("atk").value;
+    let def  = document.getElementById("def").value;
+
+    let up   = document.getElementById("upper").value;
+    let down = document.getElementById("downer").value;
+    let mio  = document.getElementById("mio").value;
 
     alert(calcDamage(init, atk, def, (up-down), mio, 0));
 }
 
+function fillParam(){
+    let e = document.getElementById('level_0_'+battle[0]);
+    console.log(battle[0],parseInt(e.value));
+    document.getElementById('init').value = result[battle[0]-1][parseInt(e.value)-1];
+}
+
 function calcDamage(_init, _atk, _blk, _const, _mioHP, _elem){
+    let damage;
     console.log(_init, _atk, _blk, _const, _mioHP, _elem)
     if (_mioHP > 1){
         _blk=(100-_blk)/100;
         if (_blk<=0) return 1;
-        return (_init*(1+_atk/100) - (_mioHP-1))*_blk*(_elem==0 ? 1 : 1.5)+_const;
+        return (_init*(1+_atk/100) - (_mioHP-1))*_blk*(_elem==0 ? 1 : 1.3)+_const;
     }else{
-        damage = _init*(_atk-_blk+100)/100*(_elem==0 ? 1 : 1.5)+_const-(_mioHP-1);
+        console.log(_atk-_blk+100)
+        damage = _init*(_atk-_blk+100)/100*(_elem==0 ? 1 : 1.3)+_const;
         return damage;
     }
 }
 
+//編成に追加
 function add(_id){
     if (targ.length >= 7){
         console.log("編成は7両以下である必要があります。");
@@ -58,7 +105,14 @@ function add(_id){
         return -2;
     }
     targ.push(_id);
-    targ_e[currentEdit].innerHTML += '<div class="face"><img src="face/'+_id+'.png" class="select"></div>';
-    console.log(targ);
+    targ_e[currentEdit].innerHTML += '<div class="face" ><img src="face/'+_id+'.png" class="select" id="form_'+currentEdit+'_'+_id+'" onclick="select('+currentEdit+','+_id+')"><div class="control"><input type="checkbox" class="skill" id="skill_'+currentEdit+'_'+_id+'"><input type="number" value="80" class="level" id="level_'+currentEdit+'_'+_id+'"></input></div></div>';
+    //$('#form_'+currentEdit+'_'+_id).click(()=>{console.log('clicked'+_id)});
+    if (_id === 36 && currentEdit === 1) {$('#mio_row').removeClass('hide');}
 }
 
+//戦闘対象を選択
+function select(_side, _id){
+    $('#form_'+_side+'_'+battle[_side]).removeClass('selecting');
+    battle[_side] = _id;
+    $('#form_'+_side+'_'+_id).addClass('selecting');
+}

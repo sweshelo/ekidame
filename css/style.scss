@@ -1,0 +1,145 @@
+body {
+    margin      : 10px;
+    padding     : 10px;
+    font-family : "M PLUS Rounded 1c";
+    transform   : rotate(0.03deg);
+}
+
+$iconBodySize : 80px;
+$margin       : 6px;
+$iconSize     : $iconBodySize - $margin;
+
+$formIconSize : $iconSize*1.5;
+
+.hide{
+    display : none;
+}
+
+.wrapper{
+
+    .section{
+        margin : 0 0 10px 0;
+        padding: 2px;
+
+
+        p {
+            font-size : 0.95em;
+            margin : 0 5px 5px 5px;
+            padding: 0 5px 0 5px;
+        }
+
+        h2{
+            font-size : 1.1em;
+            margin  : 0 0 10px 0;
+            padding : 0 0 0 10px;
+            border-left : solid 8px black;
+        }
+        h3{
+            font-size : 1.1em;
+            margin  : 0 0 10px 0;
+            padding : 0 0 0 5px;
+        }
+
+
+
+        .face{
+            text-align : center;
+            width   : $iconBodySize;
+            padding : 2px;
+            float   : left;
+            img{
+                background : white;
+            }
+            .select{
+                border-radius : 50%;
+                width   : $iconSize;
+                height  : $iconSize;
+                padding : 3px;
+                filter: drop-shadow(0px 0px 3px gray);
+            }
+        }
+
+
+        .clear{
+            clear : both;
+        }
+        .selected{
+            background:rgb(250,240,240);
+            filter    :drop-shadow(0px 0px 3px rgb(240,200,200));
+        }
+
+        .unselected{
+            background    : rgb(240,240,240);
+        }
+
+
+
+        .formation_wrap{
+            border-radius : 80px 10px 10px 10px;
+            padding       : 10px 10px 10px 50px;
+
+            .face{
+                width : $formIconSize;
+                .selecting{
+                    filter: drop-shadow(0px 0px 5px red);
+                }
+                .control{
+                    padding : 10px 0 0 0;
+                    .skill{
+                        margin  : 0;
+                        padding : 0;
+                        width   : $formIconSize/4;
+                        height  : $formIconSize/4;
+                        vertical-align : middle;
+                    }
+
+                    .level{
+                        text-align : center;
+                        font-size  : 1.5em;
+                        width   : $formIconSize/2;
+                        height  : $formIconSize/4;
+                        padding : 0;
+                        margin  : 0 0 0 0px;
+                        vertical-align : middle;
+                        &::-webkit-inner-spin-button,
+                        &::-webkit-outer-spin-button {
+                            -webkit-appearance: none !important;
+                            margin: 0 !important;
+                            -moz-appearance:textfield !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .form{
+            table{
+                font-size : 40px;
+                td{
+                    padding : 10px 5px 10px 5px;
+                    width : 250px;
+                    input{
+                        height : 40px;
+                        font-size : 35px;
+                        border : 2px solid black;
+                    }
+                }
+            }
+        }
+
+        #attack, #block {
+            height      : $iconBodySize + $iconSize/4*3;
+        }
+
+        .submit{
+            text-align : center;
+            #fill, #calc{
+                width  : 25%;
+                height : 60px;
+                font-size : 30px;
+                margin : 10px;
+            }
+        }
+
+    }
+}
