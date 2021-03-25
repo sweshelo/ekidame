@@ -143,7 +143,7 @@ methods[36] = (l,s,f)=>{
 //akehi
 //hibiki
 //minamo
-methods[66] = (l,f,s)=>{
+methods[66] = (l,s,f)=>{
     let t = [30,45,60,75,90,105,120]
     if(battle[0]==66&&s){
         return [0,0,t[l],0]
@@ -152,14 +152,14 @@ methods[66] = (l,f,s)=>{
     }
 }
 //maze
-methods[67] = (l,f,s)=>{
+methods[67] = (l,s,f)=>{
     let t = [(n)=>{return 0.8*n},(n)=>{return 1.0*n},(n)=>{return 1.2*n},(n)=>{return 1.4*n},(n)=>{return 1.6*n},(n)=>{return 1.8*n},(n)=>{return 2.0*n}]
     let v = Number(document.getElementById('stations').value)
-    let d = 0;
-    if(!f){
-        if(v>=70) v=70;
-        if(v>=26) d+=20;
-        if(s) d+=t[l](v);
+    if(f){
+        let d = 0;
+        if(v>=70){v=70};
+        if(v>=26){d+=20};
+        if(s&&battle[1]==67){d+=t[l](v)};
         return [0,0,0,d]
     }else{
         return [0,0,0,0]
