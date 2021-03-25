@@ -45,12 +45,20 @@
                     </div>
                     <div class="form">
                          <table>
-                             <tr><td>ATK+DEF</td><td><input type="number" id="def"></td></tr>
+                             <tr><td>ATK+DEF</td><td><input type="number" id="def" placeholder="通常は負の数です"></td></tr>
                              <tr><td>固定値軽減</td><td><input type="number" id="downer"></td></tr>
                              <tr class="hide" id="mio_row"><td>ミオHP</td><td><input type="number" id="mio"></td></tr>
                         </table>
                    </div>
                     <div class="clear"></div>
+                </div>
+                <div class="section">
+                    <div class="form">
+                         <table>
+                             <tr><td>駅数</td><td><input type="number" id="stations"></td></tr>
+                             <tr><td>距離</td><td><input type="number" id="distance"></td></tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="section">
                     <div class="submit">
@@ -60,6 +68,7 @@
                 </div>
         </main>
     </body>
+    <script src="js/denco.js"></script>
     <script src="js/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
