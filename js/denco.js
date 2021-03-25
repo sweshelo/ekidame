@@ -35,7 +35,7 @@ methods[3] = (l,s,f)=>{
 
 //reika
 methods[5] = (l,s,f)=>{
-    if(s&&f===0){
+    if(s&&!f){
         return [(5+5*l),0,0,0];
     }else{
         return [0,0,0,0];
