@@ -6,6 +6,11 @@ var dencos = document.getElementById('denco_selector')
 var a_dencos = document.getElementById('attack');
 var b_dencos = document.getElementById('block');
 
+$('#modal').offset({top:$(window).innerHeight()/2, left:($(window).innerWidth()-$('#modal').innerWidth())/2})
+$('#modal_close').on('click',()=>{$('#modal').addClass('hide')});
+
+document.cookie = "test=0";
+
 var attack = []
 var block  = []
 
@@ -71,7 +76,25 @@ function getParam(){
     let down = Number(document.getElementById("downer").value);
     let mio  = Number(document.getElementById("mio").value);
 
-    alert(calcDamage(init, atk, def, (up-down), mio, 0));
+    let damage = parseInt(calcDamage(init, atk, def, (up-down), mio, 0));
+    let color  = "";
+    if (init>damage)  color = 'blue';
+    if (init<damage)  color = 'red';
+    if (init==damage) color = 'black';
+
+    let title  = '<h3>評価結果</h3>';
+    let result = '<p>攻撃でんこの初期値 : '+init+'</p>';
+
+    if (mio<2){
+        result += '<p>ダメージ倍率 : '+(atk+def+100)/100+'倍(+'+(atk+def)+'%)</p>';
+    }else{
+        result += '<p>ミオのスキルが有効のため、計算式が変化</p>';
+    }
+        result += '<p>固定増減 : '+(up+down)+'</p>'
+        result += '<p>結果 : <span class="'+color+'">'+damage+'</span></p>';
+
+    $('#modal_body').html(title+result);
+    $('#modal').removeClass('hide');
 }
 
 function sklv(_lv){
@@ -123,31 +146,6 @@ function fillParam(){
     let p = [0, 0, 0, 0];
     let s = false;
 
-    /*
-    for(let i=0;i<attack.length;i++){
-        let sel = document.getElementById('skill_0_'+attack[i]);
-        let l = parseInt(document.getElementById('level_0_'+attack[i]).value);
-        if (sel!=null) {s = Boolean(sel.checked);} else {s=false}
-        console.log(attack[i]);
-        if(sklv(l)&&methods[attack[i]]!=null){
-            let g = methods[attack[i]](sklv(l)-1,s,false);
-            for(let j=0;j<4;j++){p[j]+=Number(g[j])}
-            console.log(i,g);
-        }
-    }
-    for(let i=0;i<block.length;i++){
-        let sel = document.getElementById('skill_1_'+block[i]);
-        let l = parseInt(document.getElementById('level_1_'+block[i]).value);
-        if (sel!=null) {s = Boolean(sel.checked);} else {s=false}
-        if(sklv(l)&&methods[block[i]]!=null){
-            let g = methods[block[i]](sklv(l)-1,s,true);
-            for(let j=0;j<4;j++){p[j]+=Number(g[j])}
-            console.log(i,g);
-            console.log(Number('-1'))
-        }
-    }
-    */
-
     for(let side=0;side<2;side++){
         if(side==0){
             targFromation = attack;
@@ -163,11 +161,10 @@ function fillParam(){
             if(sklv(l)&&methods[targFromation[i]]!=null){
                 let g = methods[targFromation[i]](sklv(l)-1,s,Boolean(side));
                 for(let j=0;j<4;j++){p[j]+=Number(g[j])}
-                console.log(i,g);
+                console.log(i,g,side);
             }
         }
     }
-
 
     document.getElementById('atk').value    = p[0];
     document.getElementById('def').value    = p[1];

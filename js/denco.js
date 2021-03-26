@@ -1,5 +1,15 @@
 var methods = [101];
 
+const denco = class {
+    constructor(_id = -1, _name = '', _element = -1, _active = false, _skill = (l,s,f)=>{return[0,0,0,0]}){
+        this.id      = _id;
+        this.name    = _name;
+        this.element = _element;
+        this.active  = _active;
+        this.skill   = _skill;
+    }
+}
+
 /* methodの引数
     l : スキルレベル
     s : スキル(true:有効 false:無効)
