@@ -1,5 +1,9 @@
 <html>
     <head>
+        <meta name="description" content="駅メモ!ダメージ計算ツール">
+        <meta name="keywords" content="駅メモ、アワメモ、泡メモ、計算、ダメージ">
+        <meta name="author" content="sweshelo">
+        <title>駅メモ!ダメージ計算</title>
         <link rel="stylesheet" href="css/style.css">
         <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
     </head>
@@ -7,18 +11,31 @@
         <main>
             <div class="wrapper">
                 <div class="section">
-                    <h2>駅メモダメージ計算ツール V0.0</h2>
-                    <p>
-                    駅メモのダメージを計算します。作者が面倒臭がって切り捨て処理をしていないので誤差が出ます。<br>
-                    あくまで目安としてご利用ください。
-                    </p>
-                    <h3>使い方</h3>
-                    <p>
-                    追加したい編成の車両をクリックしたあと、「でんこをえらぶ」から編成に組み込むでんこを選びます。<br>
-                    編成内のでんこアイコンをクリックすると赤くハイライトされます。ハイライトされたでんこがダメージを与える/受けるでんこになります。<br>
-                    チェックボックスにチェックを入れると、そのでんこはスキルを発動したものとして計算を行います。<br>
-                    入力欄に数字を入れると、そのでんこのレベルを個別に設定できます。スキルレベルもこのレベルに依存します。<br>
-                    </p>
+                    <h2>駅メモダメージ計算ツール V0.2</h2>
+                    <!--
+                        <p>
+                        駅メモのダメージを計算します。作者が面倒臭がって切り捨て処理をしていないので誤差が出ます。<br>
+                        あくまで目安としてご利用ください。
+                        </p>
+                        <h3>使い方</h3>
+                        <p>
+                        追加したい編成の車両をクリックしたあと、「でんこをえらぶ」から編成に組み込むでんこを選びます。<br>
+                        編成内のでんこアイコンをクリックすると赤くハイライトされます。ハイライトされたでんこがダメージを与える/受けるでんこになります。<br>
+                        チェックボックスにチェックを入れると、そのでんこはスキルを発動したものとして計算を行います。<br>
+                        入力欄に数字を入れると、そのでんこのレベルを個別に設定できます。スキルレベルもこのレベルに依存します。<br>
+                        </p>
+                    -->
+                    <div id="modal">
+                        <div id="modal_body">
+                            <h3>お知らせ - v0.2</h3>
+                            <p>No.00~No.30までのでんこのスキルを実装しました。</p>
+                            <p>りんご自身がアタッカーでない場合もスキルが発動してしまう不具合を修正しました。</p><br>
+                            <p>ご利用は初めてですか?  - <a href="https://twitter.com/p4grus_major/status/1375066391275954180">使い方を見る</a></p>
+                        </div>
+                        <div id="modal_submit">
+                            <button id="modal_close">閉じる</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="section">
                     <h2>でんこをえらぶ</h2>
@@ -44,19 +61,19 @@
                         <div id="block"></div>
                     </div>
                     <div class="form">
-                         <table>
-                             <tr><td>ATK+DEF</td><td><input type="number" id="def" placeholder="通常は負の数です"></td></tr>
-                             <tr><td>固定値軽減</td><td><input type="number" id="downer"></td></tr>
-                             <tr class="hide" id="mio_row"><td>ミオHP</td><td><input type="number" id="mio"></td></tr>
+                        <table>
+                            <tr><td>ATK+DEF</td><td><input type="number" id="def" placeholder="通常は負の数です"></td></tr>
+                            <tr><td>固定値軽減</td><td><input type="number" id="downer"></td></tr>
+                            <tr class="hide" id="mio_row"><td>ミオHP</td><td><input type="number" id="mio"></td></tr>
                         </table>
-                   </div>
+                    </div>
                     <div class="clear"></div>
                 </div>
                 <div class="section">
                     <div class="form">
-                         <table>
-                             <tr><td>駅数</td><td><input type="number" id="stations"></td></tr>
-                             <tr><td>距離</td><td><input type="number" id="distance"></td></tr>
+                        <table>
+                            <tr><td>駅数</td><td><input type="number" id="stations"></td></tr>
+                            <tr><td>距離</td><td><input type="number" id="distance"></td></tr>
                         </table>
                     </div>
                 </div>
@@ -67,8 +84,8 @@
                     </div>
                 </div>
         </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/denco.js"></script>
+        <script src="js/app.js"></script>
     </body>
-    <script src="js/denco.js"></script>
-    <script src="js/app.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
