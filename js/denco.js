@@ -144,9 +144,10 @@ req.onload = function(){
     //sigure
     dencoh[21].skill = (l,s,f)=>{
         let t = [-5,-9,-13,-17,-20,-23,-26];
-        if(s&&f&&battle[f].type=='attacker') return [t[l],0,0,0]
+        if(s&&f&&dencoh[battle[1]].type=='attacker') return [0,t[l],0,0]
         return [0,0,0,0]
     }
+
     //ren
     //mirai
     //beatrice
