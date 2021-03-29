@@ -45,7 +45,7 @@ for(let i=0;i<2;i++){
 //でんこ一覧
 window.onload = ()=>{
     let baf = "";
-    for(let i=0;i<100;i++){
+    for(let i=0;i<101;i++){
         let isSkillAvailable = "";
         baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select" id="select_'+i+'"></div>';
     }
@@ -75,6 +75,13 @@ function getParam(){
     let down = Number(document.getElementById("downer").value);
     let mio  = Number(document.getElementById("mio").value);
 
+    let mio_check = document.getElementById("skill_1_36");
+    if (mio_check!=null){
+        mio_check = mio_check.checked;
+    }else{
+        mio_check = false;
+    }
+
     let damage = parseInt(calcDamage(init, atk, def, (up-down), mio, 0));
     let color  = "";
     if (init>damage)  color = 'blue';
@@ -84,10 +91,11 @@ function getParam(){
     let title  = '評価結果';
     let result = '攻撃でんこの初期値 : '+init+'<br>';
 
-    if (mio<2){
-        result += 'ダメージ倍率 : '+(atk+def+100)/100+'倍(+'+(atk+def)+'%)<br>';
-    }else{
+    console.log(mio_check);
+    if (mio>=2&&mio_check){
         result += 'ミオのスキルが有効のため、計算式が変化<br>';
+    }else{
+        result += 'ダメージ倍率 : '+(atk+def+100)/100+'倍(+'+(atk+def)+'%)<br>';
     }
 
     result += '固定増減 : '+(up+down)+'<br>';
@@ -136,11 +144,11 @@ function fillParam(){
         showModal('ご案内','指定されたレベルが正常な値ではありません。');
         return -3;
     }
-    if (dencoh[battle[0]].hp[level-1]==0){
+    if (dencoh[battle[0]].hp[level]==0){
         showModal('ご案内','申し訳ありません。\n指定されたでんこのパラメータ情報は現在存在しません。');
         return -4
     }
-    document.getElementById('init').value = dencoh[battle[0]].hp[level-1];
+    document.getElementById('init').value = dencoh[battle[0]].ap[level];
 
     let p = [0, 0, 0, 0];
     let s = false;
@@ -198,10 +206,11 @@ function add(_id){
     }
     targ.push(_id);
     console.log(dencoh[_id])
-    if (dencoh[_id].skill!=null) {chkbox = '<input type="checkbox" class="skill" id="skill_'+currentEdit+'_'+_id+'">'}
+    if (dencoh[_id].skill!=null&&dencoh[_id].active==false) {chkbox = '<input type="checkbox" class="skill" id="skill_'+currentEdit+'_'+_id+'">'}
     targ_e[currentEdit].innerHTML += '<div class="face" ><img src="face/'+_id+'.png" class="select" id="form_'+currentEdit+'_'+_id+'" onclick="select('+currentEdit+','+_id+')"><div class="control">'+chkbox+'<input type="number" value="80" class="level" id="level_'+currentEdit+'_'+_id+'"></input></div></div>';
     //$('#form_'+currentEdit+'_'+_id).click(()=>{console.log('clicked'+_id)});
-    if (_id === 36 && currentEdit === 1) {$('#mio_row').removeClass('hide');}
+    //if (_id === 36 && currentEdit === 1) {$('#mio_row').removeClass('hide');}
+    if (dencoh[_id].addFunc!=null) dencoh[_id].addFunc(currentEdit);
 
     if (battle[currentEdit]==-1) select(currentEdit, _id);
 }
