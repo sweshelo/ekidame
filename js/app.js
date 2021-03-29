@@ -6,7 +6,7 @@ var dencos = document.getElementById('denco_selector')
 var a_dencos = document.getElementById('attack');
 var b_dencos = document.getElementById('block');
 
-$('#modal').offset({top:$(window).innerHeight()/2, left:($(window).innerWidth()-$('#modal').innerWidth())/2})
+$('#modal').offset({top:$(window).scrollTop, left:($(window).innerWidth()-$('#modal').innerWidth())/2})
 $('#modal_close').on('click',()=>{$('#modal').addClass('hide')});
 
 document.cookie = "test=0";
@@ -28,16 +28,6 @@ calc.onclick = ()=>{getParam()};
 //パラメータ取得
 fill.onclick = ()=>{fillParam()};
 
-var req = new XMLHttpRequest();
-req.open("get", "https://dmats97.xyz/ekidame/data/data.csv", true);
-req.send(null);
-
-req.onload = function(){
-    let tmp = req.responseText.split("\n");
-    for(let i=0;i<tmp.length;i++){
-        result[i] = tmp[i].split(',');
-    }
-}
 
 //編成選択
 let index = ['a', 'b'];
@@ -56,16 +46,25 @@ for(let i=0;i<2;i++){
 window.onload = ()=>{
     let baf = "";
     for(let i=0;i<100;i++){
-        //if (i==17) continue;
-        baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select"></div>';
+        let isSkillAvailable = "";
+        baf += '<div class="face" onclick="add('+i+');"><img src="face/'+i+'.png" class="select" id="select_'+i+'"></div>';
     }
     dencos.innerHTML = baf;
     targ = attack;
     $('#formation_a').addClass("selected");
     $('#formation_b').addClass("unselected");
-    //console.log(result);
+
+    showModal('お知らせ - v0.2','<li>No.00〜No.30までのでんこのうち、ダメージに影響を及ぼすでんこのみスキルを実装しました。スキルが利用可能なでんこはアイコンが青くハイライトされます。</li><li>りんご自身がアタッカーでない場合もスキルが発動してしまう不具合を修正しました。</li><br><br>ご利用は初めてですか?  - <a href="https://twitter.com/p4grus_major/status/1375066391275954180">使い方を見る</a>');
+
 }
 
+function showModal(title, content){
+    console.log(title,content)
+    $('#modal_body').html('<h3>'+title+'</h3><p>'+content+'</p>');
+    $('#modal').removeClass('hide');
+    $('#modal').offset({top:$(window).scrollTop()+$(window).width()/2, left:($(window).width()-$('#modal').innerWidth())/2})
+    console.log($(window).scrollTop())
+}
 
 function getParam(){
     let init = Number(document.getElementById("init").value);
@@ -82,19 +81,19 @@ function getParam(){
     if (init<damage)  color = 'red';
     if (init==damage) color = 'black';
 
-    let title  = '<h3>評価結果</h3>';
-    let result = '<p>攻撃でんこの初期値 : '+init+'</p>';
+    let title  = '評価結果';
+    let result = '攻撃でんこの初期値 : '+init+'<br>';
 
     if (mio<2){
-        result += '<p>ダメージ倍率 : '+(atk+def+100)/100+'倍(+'+(atk+def)+'%)</p>';
+        result += 'ダメージ倍率 : '+(atk+def+100)/100+'倍(+'+(atk+def)+'%)<br>';
     }else{
-        result += '<p>ミオのスキルが有効のため、計算式が変化</p>';
+        result += 'ミオのスキルが有効のため、計算式が変化<br>';
     }
-        result += '<p>固定増減 : '+(up+down)+'</p>'
-        result += '<p>結果 : <span class="'+color+'">'+damage+'</span></p>';
 
-    $('#modal_body').html(title+result);
-    $('#modal').removeClass('hide');
+    result += '固定増減 : '+(up+down)+'<br>';
+    result += '結果 : <span class="'+color+'">'+damage+'</span><br>';
+
+    showModal(title, result);
 }
 
 function sklv(_lv){
@@ -123,25 +122,25 @@ function fillParam(){
 
     //HP
     if (battle[0]==-1){
-        alert('この機能はアタッカーとなるでんこを選択していた場合のみ利用できます。\n対象を選択するには、編成しているでんこのアイコンをクリックします。')
+        showModal('ご案内','この機能はアタッカーとなるでんこを選択していた場合のみ利用できます。<br>対象を選択するには、編成しているでんこのアイコンをクリックします。')
         return -1;
     }
     if (battle[0]==0){
-        alert('「のぞみ」をアタッカーに指定することは出来ません。');
+        showModal('ご案内','「のぞみ」をアタッカーに指定することは出来ません。');
         return -2;
     }
 
     let e = document.getElementById('level_0_'+battle[0]);
     let level = parseInt(e.value);
     if (level<1 || level>80){
-        alert('指定されたレベルが正常な値ではありません。');
+        showModal('ご案内','指定されたレベルが正常な値ではありません。');
         return -3;
     }
-    if (result[battle[0]-1][level-1]==0){
-        alert('申し訳ありません。\n指定されたでんこのパラメータ情報は現在存在しません。');
+    if (dencoh[battle[0]].hp[level-1]==0){
+        showModal('ご案内','申し訳ありません。\n指定されたでんこのパラメータ情報は現在存在しません。');
         return -4
     }
-    document.getElementById('init').value = result[battle[0]-1][level-1];
+    document.getElementById('init').value = dencoh[battle[0]].hp[level-1];
 
     let p = [0, 0, 0, 0];
     let s = false;
@@ -158,8 +157,8 @@ function fillParam(){
             let l = parseInt(document.getElementById('level_'+side+'_'+targFromation[i]).value);
             if (sel!=null) {s = Boolean(sel.checked);} else {s=false}
             console.log(targFromation[i]);
-            if(sklv(l)&&methods[targFromation[i]]!=null){
-                let g = methods[targFromation[i]](sklv(l)-1,s,Boolean(side));
+            if(sklv(l)&&dencoh[targFromation[i]].skill!=null){
+                let g = dencoh[targFromation[i]].skill(sklv(l)-1,s,Boolean(side));
                 for(let j=0;j<4;j++){p[j]+=Number(g[j])}
                 console.log(i,g,side);
             }
@@ -198,7 +197,8 @@ function add(_id){
         return -2;
     }
     targ.push(_id);
-    if (methods[_id]!=null) {chkbox = '<input type="checkbox" class="skill" id="skill_'+currentEdit+'_'+_id+'">'}
+    console.log(dencoh[_id])
+    if (dencoh[_id].skill!=null) {chkbox = '<input type="checkbox" class="skill" id="skill_'+currentEdit+'_'+_id+'">'}
     targ_e[currentEdit].innerHTML += '<div class="face" ><img src="face/'+_id+'.png" class="select" id="form_'+currentEdit+'_'+_id+'" onclick="select('+currentEdit+','+_id+')"><div class="control">'+chkbox+'<input type="number" value="80" class="level" id="level_'+currentEdit+'_'+_id+'"></input></div></div>';
     //$('#form_'+currentEdit+'_'+_id).click(()=>{console.log('clicked'+_id)});
     if (_id === 36 && currentEdit === 1) {$('#mio_row').removeClass('hide');}
