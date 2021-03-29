@@ -54,7 +54,7 @@ window.onload = ()=>{
     $('#formation_a').addClass("selected");
     $('#formation_b').addClass("unselected");
 
-    showModal('お知らせ - v0.2','<li>No.00〜No.30までのでんこのうち、ダメージに影響を及ぼすでんこのみスキルを実装しました。スキルが利用可能なでんこはアイコンが青くハイライトされます。</li><li>りんご自身がアタッカーでない場合もスキルが発動してしまう不具合を修正しました。</li><br><br>ご利用は初めてですか?  - <a href="https://twitter.com/p4grus_major/status/1375066391275954180">使い方を見る</a>');
+    showModal('お知らせ - v0.3','<li>No.00〜No.30までのでんこのうち、ダメージに影響を及ぼすでんこのみスキルを実装しました。スキルが利用可能なでんこはアイコンが青くハイライトされます。</li><li>りんご自身がアタッカーでない場合もスキルが発動してしまう不具合を修正しました。</li><br><br>ご利用は初めてですか?  - <a href="https://twitter.com/p4grus_major/status/1375066391275954180">使い方を見る</a>');
 
 }
 
@@ -62,7 +62,7 @@ function showModal(title, content){
     console.log(title,content)
     $('#modal_body').html('<h3>'+title+'</h3><p>'+content+'</p>');
     $('#modal').removeClass('hide');
-    $('#modal').offset({top:$(window).scrollTop()+$(window).width()/2, left:($(window).width()-$('#modal').innerWidth())/2})
+    $('#modal').offset({top:$(window).scrollTop()+$('#modal').height()/2, left:($(window).width()-$('#modal').innerWidth())/2})
     console.log($(window).scrollTop())
 }
 
