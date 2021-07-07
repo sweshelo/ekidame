@@ -340,6 +340,26 @@ req.onload = function(){
     }
 
     //himegi
+    dencoh[51].skill = (l,s,f)=>{
+        let acnt = 0, bcnt = 0;
+        let t = [1.8, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5];
+        let form = [attack, block];
+        //count attacker and defender
+        if(!f){
+            attack.forEach((d)=>{
+                if (dencoh[d].type === "attacker") acnt++;
+                console.log('debug' + d);
+            });
+
+        }else{
+            block.forEach((d)=>{
+                if (dencoh[d].type === "defender") bcnt++;
+                console.log('debug' + d);
+            });
+        }
+        return [t[l]*acnt,t[l]*bcnt,0,0];
+    }
+
     //noa
     //malin
     //nayori
