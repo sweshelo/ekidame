@@ -1,36 +1,87 @@
 body {
-  font-size: 0.9em; }
+  font-size: 0.9em;
+  background: #f0f0f0; }
 
 nav h1 {
   margin: 10px;
   text-align: center; }
 
 #app {
-  width: 100%; }
-  #app .form {
+  width: 100%;
+  /* micro clearfx */ }
+  #app .denco {
     width: 50%;
-    background: #f0f0f0;
-    float: left; }
-    #app .form .denco {
-      margin: 10px; }
-      #app .form .denco .image-wrapper {
-        text-align: right; }
-        #app .form .denco .image-wrapper .element-icon {
+    background: #fafafa; }
+    #app .denco .image-wrapper {
+      text-align: right; }
+      #app .denco .image-wrapper .element-icon {
+        width: 20px; }
+    #app .denco .text-wrapper {
+      margin: 5px;
+      padding: 5px; }
+    #app .denco .status-wrapper {
+      padding: 5px; }
+  #app .mirror {
+    transform: scale(-1, 1); }
+  #app .denco-form {
+    width: 100%;
+    background: #fafafa;
+    box-shadow: #a0a0a0 2px 2px 5px;
+    margin-top: 3px; }
+    #app .denco-form .denco-form-info {
+      overflow: hidden; }
+      #app .denco-form .denco-form-info .image-wrapper {
+        float: right;
+        z-index: 0;
+        position: relative; }
+        #app .denco-form .denco-form-info .image-wrapper .element-icon {
+          position: absolute;
+          left: 50px;
+          top: 50px;
           width: 20px; }
-      #app .form .denco .text-wrapper {
-        margin: 5px;
-        padding: 5px; }
-      #app .form .denco .status-wrapper {
-        padding: 5px; }
-    #app .form .mirror {
-      transform: scale(-1, 1); }
-    #app .form .smallest {
-      font-size: 0.3em; }
-  #app #form-left {
+        #app .denco-form .denco-form-info .image-wrapper .denco-image {
+          left: 50px; }
+      #app .denco-form .denco-form-info .text-wrapper {
+        z-index: 100;
+        padding: 5px;
+        position: absolute; }
+        #app .denco-form .denco-form-info .text-wrapper .denco-name {
+          padding: 2px; }
+        #app .denco-form .denco-form-info .text-wrapper .skill-text {
+          background: #f0f0ff;
+          border-radius: 5px;
+          padding: 4px;
+          opacity: 0.8; }
+  #app #battle-wrapper {
+    height: auto;
+    margin-bottom: 10px;
+    overflow: hidden; }
+  #app #battle-left {
     padding-left: 20px;
-    text-align: left; }
-  #app #form-right {
+    text-align: left;
+    float: left; }
+  #app #battle-right {
     padding-right: 20px;
-    text-align: right; }
+    text-align: right;
+    float: right; }
+  #app #formations-wrapper {
+    margin-top: 20px;
+    overflow: hidden; }
+  #app #form-left {
+    width: 48%;
+    padding-left: 10px;
+    float: left; }
+  #app #form-right {
+    width: 48%;
+    padding-right: 10px;
+    float: right; }
+  #app .cf:before, #app .cf:after {
+    content: "";
+    display: table; }
+  #app .cf:after {
+    clear: both; }
+
+.smallest {
+  font-size: 0.3em; }
 
 /*# sourceMappingURL=style.css.map */
