@@ -2,3 +2,5 @@
 face/*
 style.css*
 data/*
+*.json
+js/node_modules
