@@ -5,83 +5,48 @@
         <meta name="author" content="sweshelo">
         <title>駅メモ!ダメージ計算</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/destyle.css@2.0.2/destyle.css">
         <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+        <meta name="viewport" content="width=320,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     </head>
     <body>
+        <nav>
+            <h1>駅メモ！ - ダメージ計算</h1>
+        </nav>
         <main>
-            <div class="wrapper">
-                <div class="section">
-                    <h2>駅メモダメージ計算ツール V0.3</h2>
-                    <!--
-                        <p>
-                        駅メモのダメージを計算します。作者が面倒臭がって切り捨て処理をしていないので誤差が出ます。<br>
-                        あくまで目安としてご利用ください。
-                        </p>
-                        <h3>使い方</h3>
-                        <p>
-                        追加したい編成の車両をクリックしたあと、「でんこをえらぶ」から編成に組み込むでんこを選びます。<br>
-                        編成内のでんこアイコンをクリックすると赤くハイライトされます。ハイライトされたでんこがダメージを与える/受けるでんこになります。<br>
-                        チェックボックスにチェックを入れると、そのでんこはスキルを発動したものとして計算を行います。<br>
-                        入力欄に数字を入れると、そのでんこのレベルを個別に設定できます。スキルレベルもこのレベルに依存します。<br>
-                        </p>
-                    -->
-                    <div id="modal" class="hide">
-                        <div id="modal_body">
+            <div id="app">
+                <div class="form" id="form-left">
+                    <div class="denco">
+                        <div class="text-wrapper">
+                            <p class="smallest">先頭車両 - supporter</p>
+                            <p>のぞみ Lv.100</p>
                         </div>
-                        <div id="modal_submit">
-                            <button id="modal_close">閉じる</button>
+                        <div class="image-wrapper mirror">
+                            <img src="data/icon_denco_eco.png" class="element-icon">
+                            <img src="face/0.png" class="denco-image">
+                        </div>
+                        <div class="status-wrapper">
+                            <p>HP 999 / 999</p>
                         </div>
                     </div>
                 </div>
-                <div class="section">
-                    <h2>でんこをえらぶ</h2>
-                    <div id="denco_selector"></div>
-                    <div class="clear"></div>
-                </div>
-                <div class="section">
-                    <h2>攻撃側</h2>
-                    <div class="formation_wrap" id="formation_a">
-                        <div id="attack"></div>
-                    </div>
-                    <div class="form">
-                        <table id="a_table">
-                            <tr><td>AP</td><td><input type="number" id="init"></td></tr>
-                            <tr><td>ATK+DEF</td><td><input type="number" id="atk"></td></tr>
-                            <tr><td>固定ダメージ</td><td><input type="number" id="upper"></td></tr>
-                            <tr class="hide" id="a_sta_row"><td>アクセス駅数</td><td><input type="number" id="a_stations"></td></tr>
-                            <tr class="hide" id="a_link_row"><td>リンク駅数</td><td><input type="number" id="a_link"></td></tr>
-                            <tr class="hide" id="a_dest_row"><td>距離</td><td><input type="number" id="a_distance"></td></tr>
-                            <tr class="hide" id="a_mile_row"><td>マイレージ</td><td><input type="number" id="a_mile" placeholder="編成内のクラス値合計"></td></tr>
-                        </table>
+                <div class="form" id="form-right">
+                    <div class="denco">
+                        <div class="text-wrapper">
+                            <p class="smallest">先頭車両 - supporter</p>
+                            <p>のぞみ Lv.100</p>
+                        </div>
+                        <div class="image-wrapper">
+                            <img src="data/icon_denco_eco.png" class="element-icon">
+                            <img src="face/0.png">
+                        </div>
+                        <div class="status-wrapper">
+                            <p>HP 999 / 999</p>
+                        </div>
                     </div>
                 </div>
-                <div class="section">
-                    <h2>防御側</h2>
-                    <div class="formation_wrap" id="formation_b">
-                        <div id="block"></div>
-                    </div>
-                    <div class="form">
-                        <table id="b_table">
-                            <tr><td>ATK+DEF</td><td><input type="number" id="def" placeholder="通常は負の数です"></td></tr>
-                            <tr><td>固定値軽減</td><td><input type="number" id="downer"></td></tr>
-                            <tr class="hide" id="b_sta_row"><td>アクセス駅数</td><td><input type="number" id="b_stations"></td></tr>
-                            <tr class="hide" id="b_link_row"><td>リンク駅数</td><td><input type="number" id="b_link"></td></tr>
-                            <tr class="hide" id="b_dest_row"><td>距離</td><td><input type="number" id="b_distance"></td></tr>
-                            <tr class="hide" id="b_mile_row"><td>マイレージ</td><td><input type="number" id="b_mile" placeholder="編成内のクラス値合計"></td></tr>
-                            <tr class="hide" id="mio_row"><td>ミオHP</td><td><input type="number" id="mio"></td></tr>
-                        </table>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="section">
-                    <div class="submit">
-                        <button id="fill">数値の自動入力</button>
-                        <button id="calc">計算</button>
-                    </div>
-                </div>
+            </div>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js/denco.js"></script>
-        <script src="js/app.js"></script>
     </body>
 </html>
