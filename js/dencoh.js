@@ -18,13 +18,18 @@ var Ekidame = function (_React$Component) {
             fetch("data/dencoList.json").then(function (res) {
                 return res.json();
             }).then(function (res) {
-                console.log(res);
+                res["contents"].forEach(function (obj) {
+                    _this.setState({
+                        dencohTable: _this.state.dencohTable.concat(obj["partners"])
+                    });
+                });
             });
         };
 
         _this.state = {
-            leftForm: [],
-            rightForm: [],
+            leftForm: ["luna", "akehi", "maze"],
+            rightForm: ["miroku", "moe", "himegi"],
+            dencohTable: [],
             attacker: null,
             blocker: null
         };
@@ -34,6 +39,34 @@ var Ekidame = function (_React$Component) {
     _createClass(Ekidame, [{
         key: "render",
         value: function render() {
+            var _this2 = this;
+
+            var leftFormElm = [],
+                rightFormElm = [];
+            var cnt = 1;
+            if (this.state.dencohTable.find(function (e) {
+                return e.name_en == "nozomi";
+            }) === void 0) {
+                leftFormElm = React.createElement(Dencoh, { id: "0" });
+            } else {
+                leftFormElm = this.state.leftForm.map(function (name) {
+                    return _this2.state.dencohTable.find(function (e) {
+                        return e.name_en == name;
+                    });
+                }).map(function (denco, cnt) {
+                    return React.createElement(Dencoh, { id: denco.no, name: denco.name, key: denco.name_en, position: cnt + 1 });
+                });
+
+                rightFormElm = this.state.rightForm.map(function (name) {
+                    cnt++;
+                    return _this2.state.dencohTable.find(function (e) {
+                        return e.name_en == name;
+                    });
+                }).map(function (denco, cnt) {
+                    return React.createElement(Dencoh, { id: denco.no, name: denco.name, key: denco.name_en, position: cnt + 1 });
+                });
+            }
+
             return React.createElement(
                 React.Fragment,
                 null,
@@ -49,24 +82,12 @@ var Ekidame = function (_React$Component) {
                     React.createElement(
                         "div",
                         { id: "form-left", className: "cf" },
-                        React.createElement(Dencoh, { id: "0" }),
-                        React.createElement(Dencoh, { id: "1" }),
-                        React.createElement(Dencoh, { id: "2" }),
-                        React.createElement(Dencoh, { id: "3" }),
-                        React.createElement(Dencoh, { id: "4" }),
-                        React.createElement(Dencoh, { id: "5" }),
-                        React.createElement(Dencoh, { id: "6" })
+                        leftFormElm
                     ),
                     React.createElement(
                         "div",
                         { id: "form-right" },
-                        React.createElement(Dencoh, { id: "7" }),
-                        React.createElement(Dencoh, { id: "8" }),
-                        React.createElement(Dencoh, { id: "9" }),
-                        React.createElement(Dencoh, { id: "10" }),
-                        React.createElement(Dencoh, { id: "11" }),
-                        React.createElement(Dencoh, { id: "12" }),
-                        React.createElement(Dencoh, { id: "13" })
+                        rightFormElm
                     )
                 )
             );
@@ -92,12 +113,14 @@ function Dencoh(props) {
                     React.createElement(
                         "p",
                         { className: "smallest" },
-                        "2\u4E21\u76EE - supporter"
+                        props.position,
+                        "\u4E21\u76EE - supporter"
                     ),
                     React.createElement(
                         "p",
                         { className: "denco-name" },
-                        "\u30EA\u30C8 Lv. 80"
+                        props.name,
+                        " Lv. 80"
                     )
                 ),
                 React.createElement(

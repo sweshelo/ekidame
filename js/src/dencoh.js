@@ -2,20 +2,38 @@ class Ekidame extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            leftForm : [],
-            rightForm : [],
+            leftForm : [
+                "luna", "akehi", "maze"
+            ],
+            rightForm : [
+                "miroku", "moe", "himegi"
+            ],
+            dencohTable : [],
             attacker : null,
             blocker : null
         }
     }
-    componentDidMount = ()=>{
-        fetch("data/dencoList.json")
-        .then(res => res.json())
-        .then((res)=>{
-            console.log(res);
-        });
-    }
-    render() {
+
+    render(){
+        var leftFormElm = [], rightFormElm = [];
+        var cnt = 1;
+        if (this.state.dencohTable.find(e=>e.name_en == "nozomi") === void 0){
+            leftFormElm = <Dencoh id="0" />;
+        }else{
+            leftFormElm = this.state.leftForm.map((name)=>{
+                return this.state.dencohTable.find(e=>e.name_en == name)
+            }).map((denco, cnt)=>
+                <Dencoh id={denco.no} name={denco.name} key={denco.name_en} position={cnt+1} />
+            );
+
+            rightFormElm = this.state.rightForm.map((name)=>{
+                cnt++;
+                return this.state.dencohTable.find(e=>e.name_en == name)
+            }).map((denco, cnt)=>
+                <Dencoh id={denco.no} name={denco.name} key={denco.name_en} position={cnt+1} />
+            );
+        }
+
         return(
             <React.Fragment>
             <div id="battle-wrapper">
@@ -24,27 +42,29 @@ class Ekidame extends React.Component {
             </div>
             <div id="formations-wrapper">
             <div id="form-left" className="cf">
-            <Dencoh id="0"/>
-            <Dencoh id="1"/>
-            <Dencoh id="2"/>
-            <Dencoh id="3"/>
-            <Dencoh id="4"/>
-            <Dencoh id="5"/>
-            <Dencoh id="6"/>
+            {leftFormElm}
             </div>
             <div id="form-right">
-            <Dencoh id="7"/>
-            <Dencoh id="8"/>
-            <Dencoh id="9"/>
-            <Dencoh id="10"/>
-            <Dencoh id="11"/>
-            <Dencoh id="12"/>
-            <Dencoh id="13"/>
+            {rightFormElm}
             </div>
             </div>
             </React.Fragment>
-        )
+        );
     }
+
+    componentDidMount = ()=>{
+        fetch("data/dencoList.json")
+        .then(res => res.json())
+        .then((res)=>{
+            res["contents"].forEach(obj => {
+                this.setState({
+                    dencohTable : this.state.dencohTable.concat(obj["partners"])
+                });
+            })
+        })
+    }
+
+
 }
 
 function Dencoh(props){
@@ -53,8 +73,8 @@ function Dencoh(props){
         <div className="denco-form-info">
         <div className="text-wrapper">
         <div className="denco-text">
-        <p className="smallest">2両目 - supporter</p>
-        <p className="denco-name">リト Lv. 80</p>
+        <p className="smallest">{props.position}両目 - supporter</p>
+        <p className="denco-name">{props.name} Lv. 80</p>
         </div>
         <div className="skill-text">
         <p className="small">Unable</p>
