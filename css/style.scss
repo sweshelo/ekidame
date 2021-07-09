@@ -1,5 +1,6 @@
 body{
-    font-size : 0.9em;
+    font-size : 1.0em;
+    font-family : 'M PLUS Rounded 1c';
     background : #f0f0f0;
 }
 nav{
@@ -23,8 +24,8 @@ nav{
             }
         }
         .text-wrapper{
-            margin :  5px;
-            padding : 5px;
+            margin-top :  5px;
+            padding-top : 5px;
         }
         .status-wrapper{
             padding : 5px;
@@ -120,5 +121,9 @@ nav{
 
 
 .smallest{
-    font-size : 0.3em;
+    font-size : 0.5em;
+}
+
+.small{
+    font-size : 0.7em;
 }
