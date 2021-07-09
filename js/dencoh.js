@@ -9,10 +9,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Ekidame = function (_React$Component) {
     _inherits(Ekidame, _React$Component);
 
-    function Ekidame() {
+    function Ekidame(props) {
         _classCallCheck(this, Ekidame);
 
-        return _possibleConstructorReturn(this, (Ekidame.__proto__ || Object.getPrototypeOf(Ekidame)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Ekidame.__proto__ || Object.getPrototypeOf(Ekidame)).call(this, props));
+
+        _this.componentDidMount = function () {
+            fetch("data/dencoList.json").then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                console.log(res);
+            });
+        };
+
+        _this.state = {
+            leftForm: [],
+            rightForm: [],
+            attacker: null,
+            blocker: null
+        };
+        return _this;
     }
 
     _createClass(Ekidame, [{
@@ -33,24 +49,24 @@ var Ekidame = function (_React$Component) {
                     React.createElement(
                         "div",
                         { id: "form-left", className: "cf" },
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null)
+                        React.createElement(Dencoh, { id: "0" }),
+                        React.createElement(Dencoh, { id: "1" }),
+                        React.createElement(Dencoh, { id: "2" }),
+                        React.createElement(Dencoh, { id: "3" }),
+                        React.createElement(Dencoh, { id: "4" }),
+                        React.createElement(Dencoh, { id: "5" }),
+                        React.createElement(Dencoh, { id: "6" })
                     ),
                     React.createElement(
                         "div",
                         { id: "form-right" },
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null),
-                        React.createElement(Dencoh, null)
+                        React.createElement(Dencoh, { id: "7" }),
+                        React.createElement(Dencoh, { id: "8" }),
+                        React.createElement(Dencoh, { id: "9" }),
+                        React.createElement(Dencoh, { id: "10" }),
+                        React.createElement(Dencoh, { id: "11" }),
+                        React.createElement(Dencoh, { id: "12" }),
+                        React.createElement(Dencoh, { id: "13" })
                     )
                 )
             );
@@ -60,7 +76,7 @@ var Ekidame = function (_React$Component) {
     return Ekidame;
 }(React.Component);
 
-function Dencoh() {
+function Dencoh(props) {
     return React.createElement(
         "div",
         { className: "denco-form" },
@@ -98,7 +114,7 @@ function Dencoh() {
                 "div",
                 { className: "image-wrapper" },
                 React.createElement("img", { src: "data/icon_denco_eco.png", className: "element-icon" }),
-                React.createElement("img", { src: "face/77.png", className: "denco-image" })
+                React.createElement("img", { src: "face/" + props.id + ".png", className: "denco-image" })
             )
         )
     );

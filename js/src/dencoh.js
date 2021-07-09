@@ -1,4 +1,20 @@
 class Ekidame extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            leftForm : [],
+            rightForm : [],
+            attacker : null,
+            blocker : null
+        }
+    }
+    componentDidMount = ()=>{
+        fetch("data/dencoList.json")
+        .then(res => res.json())
+        .then((res)=>{
+            console.log(res);
+        });
+    }
     render() {
         return(
             <React.Fragment>
@@ -8,22 +24,22 @@ class Ekidame extends React.Component {
             </div>
             <div id="formations-wrapper">
             <div id="form-left" className="cf">
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
+            <Dencoh id="0"/>
+            <Dencoh id="1"/>
+            <Dencoh id="2"/>
+            <Dencoh id="3"/>
+            <Dencoh id="4"/>
+            <Dencoh id="5"/>
+            <Dencoh id="6"/>
             </div>
             <div id="form-right">
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
-            <Dencoh />
+            <Dencoh id="7"/>
+            <Dencoh id="8"/>
+            <Dencoh id="9"/>
+            <Dencoh id="10"/>
+            <Dencoh id="11"/>
+            <Dencoh id="12"/>
+            <Dencoh id="13"/>
             </div>
             </div>
             </React.Fragment>
@@ -31,7 +47,7 @@ class Ekidame extends React.Component {
     }
 }
 
-function Dencoh(){
+function Dencoh(props){
     return(
         <div className="denco-form">
         <div className="denco-form-info">
@@ -46,7 +62,7 @@ function Dencoh(){
         </div>
         <div className="image-wrapper">
         <img src="data/icon_denco_eco.png" className="element-icon" />
-        <img src="face/77.png" className="denco-image" />
+        <img src={"face/"+props.id+".png"} className="denco-image" />
         </div>
         </div>
         </div>
