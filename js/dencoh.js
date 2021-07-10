@@ -15,13 +15,11 @@ var Ekidame = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Ekidame.__proto__ || Object.getPrototypeOf(Ekidame)).call(this, props));
 
         _this.componentDidMount = function () {
-            fetch("data/dencoList.json").then(function (res) {
+            fetch("data/denco.json").then(function (res) {
                 return res.json();
             }).then(function (res) {
-                res["contents"].forEach(function (obj) {
-                    _this.setState({
-                        dencohTable: _this.state.dencohTable.concat(obj["partners"])
-                    });
+                _this.setState({
+                    dencohTable: res
                 });
             });
         };
@@ -44,26 +42,33 @@ var Ekidame = function (_React$Component) {
             var leftFormElm = [],
                 rightFormElm = [];
             var cnt = 1;
-            if (this.state.dencohTable.find(function (e) {
-                return e.name_en == "nozomi";
-            }) === void 0) {
-                leftFormElm = React.createElement(Dencoh, { id: "0" });
+            if (this.state.dencohTable.length === 0) {
+                var dummyObj = {
+                    "name": "セリア",
+                    "name_en": "seria",
+                    "id": 1,
+                    "no": "1",
+                    "element": "eco",
+                    "theme_color": "yellow",
+                    "description": "黄陽セリア：設備メンテを行う救護型。面倒見がよく、癒し系なみんなのお姉さん的存在。でんこは修復できるのに超絶家電オンチ。少しいじくるだけで爆発物に変えてしまう......。"
+                };
+
+                leftFormElm = React.createElement(Dencoh, { denco: dummyObj });
             } else {
                 leftFormElm = this.state.leftForm.map(function (name) {
                     return _this2.state.dencohTable.find(function (e) {
                         return e.name_en == name;
                     });
                 }).map(function (denco, cnt) {
-                    return React.createElement(Dencoh, { id: denco.no, name: denco.name, key: denco.name_en, position: cnt + 1 });
+                    return React.createElement(Dencoh, { denco: denco, position: cnt + 1 });
                 });
 
                 rightFormElm = this.state.rightForm.map(function (name) {
-                    cnt++;
                     return _this2.state.dencohTable.find(function (e) {
                         return e.name_en == name;
                     });
                 }).map(function (denco, cnt) {
-                    return React.createElement(Dencoh, { id: denco.no, name: denco.name, key: denco.name_en, position: cnt + 1 });
+                    return React.createElement(Dencoh, { denco: denco, position: cnt + 1 });
                 });
             }
 
@@ -89,7 +94,8 @@ var Ekidame = function (_React$Component) {
                         { id: "form-right" },
                         rightFormElm
                     )
-                )
+                ),
+                React.createElement(DencohSelector, null)
             );
         }
     }]);
@@ -119,7 +125,7 @@ function Dencoh(props) {
                     React.createElement(
                         "p",
                         { className: "denco-name" },
-                        props.name,
+                        props.denco.name,
                         " Lv. 80"
                     )
                 ),
@@ -136,8 +142,8 @@ function Dencoh(props) {
             React.createElement(
                 "div",
                 { className: "image-wrapper" },
-                React.createElement("img", { src: "data/icon_denco_eco.png", className: "element-icon" }),
-                React.createElement("img", { src: "face/" + props.id + ".png", className: "denco-image" })
+                React.createElement("img", { src: "data/icon_denco_" + props.denco.element + ".png", className: "element-icon" }),
+                React.createElement("img", { src: "face/" + props.denco.no + ".png", className: "denco-image" })
             )
         )
     );
@@ -187,4 +193,56 @@ function Dencoh_battle(props) {
             )
         )
     );
+}
+
+function DencohSelector(props) {
+    var heatDencoh = [4, 51, 64, 67];
+    var heatDencohElem = heatDencoh.map(function (denco) {
+        return React.createElement(DencohIcon, { id: denco });
+    });
+
+    return React.createElement(
+        "div",
+        { id: "dencohSelectModal" },
+        React.createElement("input", { type: "radio", id: "elem-heat", name: "elem", defaultChecked: true }),
+        React.createElement(
+            "label",
+            { className: "elem-tab", htmlFor: "elem-heat" },
+            "heat"
+        ),
+        React.createElement("input", { type: "radio", id: "elem-eco", name: "elem" }),
+        React.createElement(
+            "label",
+            { className: "elem-tab", htmlFor: "elem-eco" },
+            "eco"
+        ),
+        React.createElement("input", { type: "radio", id: "elem-cool", name: "elem" }),
+        React.createElement(
+            "label",
+            { className: "elem-tab", htmlFor: "elem-cool" },
+            "cool"
+        ),
+        React.createElement("input", { type: "radio", id: "elem-flat", name: "elem" }),
+        React.createElement(
+            "label",
+            { className: "elem-tab", htmlFor: "elem-flat" },
+            "flat"
+        ),
+        React.createElement(
+            "div",
+            { className: "dencoh-list", id: "elem-heat-dencoh" },
+            heatDencohElem
+        ),
+        React.createElement("div", { className: "dencoh-list", id: "elem-eco-dencoh" }),
+        React.createElement("div", { className: "dencoh-list", id: "elem-cool-dencoh" }),
+        React.createElement("div", { className: "dencoh-list", id: "elem-flat-dencoh" })
+    );
+
+    function DencohIcon(props) {
+        return React.createElement(
+            "div",
+            { className: "dencoh-list-icon" },
+            React.createElement("img", { src: "face/" + props.id + ".png" })
+        );
+    }
 }

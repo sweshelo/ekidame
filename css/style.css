@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-size: 1.0em;
   font-family: 'M PLUS Rounded 1c';
@@ -9,12 +10,14 @@ nav h1 {
 
 #app {
   width: 100%;
+  position: relative;
   /* micro clearfx */ }
   #app .denco {
     width: 50%;
     background: #fafafa; }
     #app .denco .image-wrapper {
-      text-align: right; }
+      text-align: right;
+      pointer-events: none; }
       #app .denco .image-wrapper .element-icon {
         width: 20px; }
     #app .denco .text-wrapper {
@@ -36,14 +39,16 @@ nav h1 {
         z-index: 0;
         position: relative; }
         #app .denco-form .denco-form-info .image-wrapper .element-icon {
+          pointer-events: none;
           position: absolute;
           left: 50px;
           top: 50px;
           width: 20px; }
         #app .denco-form .denco-form-info .image-wrapper .denco-image {
+          pointer-events: none;
           left: 50px; }
       #app .denco-form .denco-form-info .text-wrapper {
-        z-index: 100;
+        z-index: 10;
         padding: 5px;
         position: absolute; }
         #app .denco-form .denco-form-info .text-wrapper .denco-name {
@@ -81,6 +86,46 @@ nav h1 {
     display: table; }
   #app .cf:after {
     clear: both; }
+  #app #dencohSelectModal {
+    position: absolute;
+    background: white;
+    box-shadow: gray 0px 0px 6px;
+    top: 10px;
+    left: 5%;
+    width: 90%;
+    z-index: 20;
+    padding: 10px;
+    /*タブ切り替えの中身のスタイル*/
+    /*選択されているタブのコンテンツのみを表示*/
+    /*選択されているタブのスタイルを変える*/ }
+    #app #dencohSelectModal label {
+      width: calc(100%/4);
+      float: left;
+      text-align: center; }
+    #app #dencohSelectModal input {
+      display: none; }
+    #app #dencohSelectModal .dencoh-list {
+      display: none;
+      clear: both;
+      overflow: hidden; }
+    #app #dencohSelectModal #elem-heat:checked ~ #elem-heat-dencoh,
+    #app #dencohSelectModal #elem-eco:checked ~ #elem-eco-dencoh,
+    #app #dencohSelectModal #elem-cool:checked ~ #elem-cool-dencoh,
+    #app #dencohSelectModal #elem-flat:checked ~ #elem-flat-dencoh {
+      display: block; }
+    #app #dencohSelectModal input:checked + .elem-tab {
+      background-color: #5ab4bd;
+      color: #fff; }
+    #app #dencohSelectModal .dencoh-list {
+      padding-top: 10px; }
+      #app #dencohSelectModal .dencoh-list .dencoh-list-icon {
+        float: left;
+        width: calc(100%/6);
+        padding: 2px; }
+        #app #dencohSelectModal .dencoh-list .dencoh-list-icon img {
+          width: 100%;
+          border-radius: 50%;
+          border: #c0c0c0 solid 3px; }
 
 .smallest {
   font-size: 0.5em; }

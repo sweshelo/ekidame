@@ -12,6 +12,7 @@ nav{
 
 #app{
     width : 100%;
+    position : relative;
 
     .denco{
         width : 50%;
@@ -19,6 +20,7 @@ nav{
         background : #fafafa;
         .image-wrapper{
             text-align : right;
+            pointer-events : none;
             .element-icon{
                 width : 20px;
             }
@@ -50,17 +52,19 @@ nav{
                 z-index : 0;
                 position : relative;
                 .element-icon{
+                    pointer-events : none;
                     position : absolute;
                     left : 50px;
                     top : 50px;
                     width : 20px;
                 }
                 .denco-image{
+                    pointer-events : none;
                     left : 50px;
                 }
             }
             .text-wrapper{
-                z-index : 100;
+                z-index : 10;
                 padding : 5px;
                 position : absolute;
                 .denco-name{
@@ -117,6 +121,64 @@ nav{
         display:table
     }
     .cf:after { clear:both }
+
+    #dencohSelectModal{
+        position : absolute;
+        background : white;
+        box-shadow : gray 0px 0px 6px;
+        top : 10px;
+        left : 5%;
+        width : 90%;
+        z-index : 20;
+
+        padding : 10px;
+
+        label{
+            width : calc(100%/4);
+            float : left;
+            text-align : center;
+        }
+
+        input{
+            display : none;
+        }
+
+        /*タブ切り替えの中身のスタイル*/
+        .dencoh-list {
+            display: none;
+            clear: both;
+            overflow: hidden;
+        }
+
+        /*選択されているタブのコンテンツのみを表示*/
+        #elem-heat:checked ~ #elem-heat-dencoh,
+        #elem-eco:checked ~ #elem-eco-dencoh,
+        #elem-cool:checked ~ #elem-cool-dencoh,
+        #elem-flat:checked ~ #elem-flat-dencoh{
+            display: block;
+        }
+
+        /*選択されているタブのスタイルを変える*/
+        & input:checked + .elem-tab {
+            background-color: #5ab4bd;
+            color: #fff;
+        }
+
+        .dencoh-list{
+            padding-top : 10px;
+            .dencoh-list-icon{
+                float : left;
+                width : calc(100%/6);
+                padding : 2px;
+                img{
+                    width : 100%;
+                    border-radius : 50%;
+                    border : #c0c0c0 solid 3px;
+                }
+            }
+        }
+
+    }
 }
 
 
@@ -127,3 +189,4 @@ nav{
 .small{
     font-size : 0.7em;
 }
+
