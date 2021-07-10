@@ -57,7 +57,7 @@ class Ekidame extends React.Component {
             {rightFormElm}
             </div>
             </div>
-            <DencohSelector />
+            <DencohSelector dataTable={this.state.dencohTable}/>
             </React.Fragment>
         );
     }
@@ -90,7 +90,7 @@ function Dencoh(props){
         </div>
         <div className="image-wrapper">
         <img src={"data/icon_denco_"+props.denco.element+".png"} className="element-icon" />
-        <img src={"face/"+props.denco.no+".png"} className="denco-image" />
+        <img src={"face/"+props.denco.name_en+".png"} className="denco-image" />
         </div>
         </div>
         </div>
@@ -106,7 +106,7 @@ function Dencoh_battle(props){
         </div>
         <div className={"image-wrapper " + props.addClass}>
         <img src="data/icon_denco_eco.png" className="element-icon" />
-        <img src="face/77.png" className="denco-image" />
+        <img src="face/reto.png" className="denco-image" />
         </div>
         <div className="status-wrapper">
         <p>HP 999 / 999</p>
@@ -119,10 +119,15 @@ function Dencoh_battle(props){
 }
 
 function DencohSelector(props){
-    let heatDencoh = [4, 51, 64, 67];
-    let heatDencohElem = heatDencoh.map(denco=>{
-        return <DencohIcon id={denco} />
-    });
+    let DencohElem = {
+        "heat":[],
+        "eco" :[],
+        "cool":[],
+        "flat":[]
+    };
+    props.dataTable.forEach((denco)=>{
+        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} />);
+    })
 
     return (
         <div id="dencohSelectModal">
@@ -134,17 +139,18 @@ function DencohSelector(props){
         <label className="elem-tab" htmlFor="elem-cool">cool</label>
         <input type="radio" id="elem-flat" name="elem" />
         <label className="elem-tab" htmlFor="elem-flat">flat</label>
-        <div className="dencoh-list" id="elem-heat-dencoh">{heatDencohElem}</div>
-        <div className="dencoh-list" id="elem-eco-dencoh"></div>
-        <div className="dencoh-list" id="elem-cool-dencoh"></div>
-        <div className="dencoh-list" id="elem-flat-dencoh"></div>
+        <div className={"dencoh-list heat-color"} id="elem-heat-dencoh">{DencohElem["heat"]}</div>
+        <div className={"dencoh-list eco-color"} id="elem-eco-dencoh">{DencohElem["eco"]}</div>
+        <div className={"dencoh-list cool-color"} id="elem-cool-dencoh">{DencohElem["cool"]}</div>
+        <div className={"dencoh-list flat-color"} id="elem-flat-dencoh">{DencohElem["flat"]}</div>
+        <button>戻る</button>
         </div>
     )
 
     function DencohIcon(props){
         return(
             <div className="dencoh-list-icon">
-            <img src={"face/"+props.id+".png"} />
+            <img src={"face/"+props.name+".png"} />
             </div>
         )
     }

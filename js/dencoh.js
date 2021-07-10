@@ -95,7 +95,7 @@ var Ekidame = function (_React$Component) {
                         rightFormElm
                     )
                 ),
-                React.createElement(DencohSelector, null)
+                React.createElement(DencohSelector, { dataTable: this.state.dencohTable })
             );
         }
     }]);
@@ -143,7 +143,7 @@ function Dencoh(props) {
                 "div",
                 { className: "image-wrapper" },
                 React.createElement("img", { src: "data/icon_denco_" + props.denco.element + ".png", className: "element-icon" }),
-                React.createElement("img", { src: "face/" + props.denco.no + ".png", className: "denco-image" })
+                React.createElement("img", { src: "face/" + props.denco.name_en + ".png", className: "denco-image" })
             )
         )
     );
@@ -171,7 +171,7 @@ function Dencoh_battle(props) {
             "div",
             { className: "image-wrapper " + props.addClass },
             React.createElement("img", { src: "data/icon_denco_eco.png", className: "element-icon" }),
-            React.createElement("img", { src: "face/77.png", className: "denco-image" })
+            React.createElement("img", { src: "face/reto.png", className: "denco-image" })
         ),
         React.createElement(
             "div",
@@ -196,9 +196,14 @@ function Dencoh_battle(props) {
 }
 
 function DencohSelector(props) {
-    var heatDencoh = [4, 51, 64, 67];
-    var heatDencohElem = heatDencoh.map(function (denco) {
-        return React.createElement(DencohIcon, { id: denco });
+    var DencohElem = {
+        "heat": [],
+        "eco": [],
+        "cool": [],
+        "flat": []
+    };
+    props.dataTable.forEach(function (denco) {
+        DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en }));
     });
 
     return React.createElement(
@@ -230,19 +235,36 @@ function DencohSelector(props) {
         ),
         React.createElement(
             "div",
-            { className: "dencoh-list", id: "elem-heat-dencoh" },
-            heatDencohElem
+            { className: "dencoh-list heat-color", id: "elem-heat-dencoh" },
+            DencohElem["heat"]
         ),
-        React.createElement("div", { className: "dencoh-list", id: "elem-eco-dencoh" }),
-        React.createElement("div", { className: "dencoh-list", id: "elem-cool-dencoh" }),
-        React.createElement("div", { className: "dencoh-list", id: "elem-flat-dencoh" })
+        React.createElement(
+            "div",
+            { className: "dencoh-list eco-color", id: "elem-eco-dencoh" },
+            DencohElem["eco"]
+        ),
+        React.createElement(
+            "div",
+            { className: "dencoh-list cool-color", id: "elem-cool-dencoh" },
+            DencohElem["cool"]
+        ),
+        React.createElement(
+            "div",
+            { className: "dencoh-list flat-color", id: "elem-flat-dencoh" },
+            DencohElem["flat"]
+        ),
+        React.createElement(
+            "button",
+            null,
+            "\u623B\u308B"
+        )
     );
 
     function DencohIcon(props) {
         return React.createElement(
             "div",
             { className: "dencoh-list-icon" },
-            React.createElement("img", { src: "face/" + props.id + ".png" })
+            React.createElement("img", { src: "face/" + props.name + ".png" })
         );
     }
 }

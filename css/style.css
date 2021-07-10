@@ -88,20 +88,24 @@ nav h1 {
     clear: both; }
   #app #dencohSelectModal {
     position: absolute;
+    opacity: 0.9;
     background: white;
     box-shadow: gray 0px 0px 6px;
     top: 10px;
     left: 5%;
     width: 90%;
     z-index: 20;
+    border-radius: 8px;
+    text-align: center;
     padding: 10px;
     /*タブ切り替えの中身のスタイル*/
-    /*選択されているタブのコンテンツのみを表示*/
-    /*選択されているタブのスタイルを変える*/ }
+    /*選択されているタブのコンテンツのみを表示*/ }
     #app #dencohSelectModal label {
       width: calc(100%/4);
       float: left;
-      text-align: center; }
+      text-align: center;
+      padding: 3px 0 3px 0;
+      border-radius: 4px 4px 0 0; }
     #app #dencohSelectModal input {
       display: none; }
     #app #dencohSelectModal .dencoh-list {
@@ -113,19 +117,43 @@ nav h1 {
     #app #dencohSelectModal #elem-cool:checked ~ #elem-cool-dencoh,
     #app #dencohSelectModal #elem-flat:checked ~ #elem-flat-dencoh {
       display: block; }
-    #app #dencohSelectModal input:checked + .elem-tab {
-      background-color: #5ab4bd;
-      color: #fff; }
+    #app #dencohSelectModal input[id="elem-heat"]:checked + .elem-tab {
+      background-color: #ff7f50; }
+    #app #dencohSelectModal input[id="elem-eco"]:checked + .elem-tab {
+      background-color: #11bb22; }
+    #app #dencohSelectModal input[id="elem-cool"]:checked + .elem-tab {
+      background-color: #5ab4bd; }
+    #app #dencohSelectModal input[id="elem-flat"]:checked + .elem-tab {
+      background-color: #dcdcdc; }
+    #app #dencohSelectModal .heat-color {
+      background-color: #ff7f50; }
+    #app #dencohSelectModal .eco-color {
+      background-color: #11bb22; }
+    #app #dencohSelectModal .cool-color {
+      background-color: #5ab4bd; }
+    #app #dencohSelectModal .flat-color {
+      background-color: #dcdcdc; }
     #app #dencohSelectModal .dencoh-list {
-      padding-top: 10px; }
+      padding: 10px 5% 10px 5%;
+      border-radius: 0 0 4px 4px; }
       #app #dencohSelectModal .dencoh-list .dencoh-list-icon {
         float: left;
         width: calc(100%/6);
-        padding: 2px; }
+        padding: 1px; }
         #app #dencohSelectModal .dencoh-list .dencoh-list-icon img {
+          pointer-events: none;
+          background-color: white;
           width: 100%;
           border-radius: 50%;
           border: #c0c0c0 solid 3px; }
+    #app #dencohSelectModal button {
+      margin: 5px;
+      padding: 5px 10px 5px 10px;
+      text-align: center;
+      border-radius: 5px;
+      border: solid 2px white;
+      background-color: silver;
+      box-shadow: gray 0 0 4px; }
 
 .smallest {
   font-size: 0.5em; }
