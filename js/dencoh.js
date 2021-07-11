@@ -206,6 +206,11 @@ function DencohSelector(props) {
         DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en }));
     });
 
+    var hide = function hide() {
+        $('#dencohSelectModal').addClass('hide');
+        console.log('clicked');
+    };
+
     return React.createElement(
         "div",
         { id: "dencohSelectModal" },
@@ -255,7 +260,7 @@ function DencohSelector(props) {
         ),
         React.createElement(
             "button",
-            null,
+            { onClick: hide },
             "\u623B\u308B"
         )
     );

@@ -129,6 +129,11 @@ function DencohSelector(props){
         DencohElem[denco.element].push(<DencohIcon name={denco.name_en} />);
     })
 
+    let hide = ()=>{
+        $('#dencohSelectModal').addClass('hide');
+        console.log('clicked');
+    };
+
     return (
         <div id="dencohSelectModal">
         <input type="radio" id="elem-heat" name="elem" defaultChecked />
@@ -143,7 +148,7 @@ function DencohSelector(props){
         <div className={"dencoh-list eco-color"} id="elem-eco-dencoh">{DencohElem["eco"]}</div>
         <div className={"dencoh-list cool-color"} id="elem-cool-dencoh">{DencohElem["cool"]}</div>
         <div className={"dencoh-list flat-color"} id="elem-flat-dencoh">{DencohElem["flat"]}</div>
-        <button>戻る</button>
+        <button onClick={hide}>戻る</button>
         </div>
     )
 
