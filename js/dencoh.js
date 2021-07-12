@@ -18,6 +18,7 @@ var Ekidame = function (_React$Component) {
             fetch("data/denco.json").then(function (res) {
                 return res.json();
             }).then(function (res) {
+                console.log(res);
                 _this.setState({
                     dencohTable: res
                 });
@@ -25,8 +26,8 @@ var Ekidame = function (_React$Component) {
         };
 
         _this.state = {
-            leftForm: ["luna", "akehi", "maze"],
-            rightForm: ["miroku", "moe", "himegi"],
+            leftForm: ["", "", "", "", "", "", ""],
+            rightForm: ["", "", "", "", "", "", ""],
             dencohTable: [],
             attacker: null,
             blocker: null
@@ -44,13 +45,13 @@ var Ekidame = function (_React$Component) {
             var cnt = 1;
             if (this.state.dencohTable.length === 0) {
                 var dummyObj = {
-                    "name": "セリア",
-                    "name_en": "seria",
-                    "id": 1,
-                    "no": "1",
-                    "element": "eco",
-                    "theme_color": "yellow",
-                    "description": "黄陽セリア：設備メンテを行う救護型。面倒見がよく、癒し系なみんなのお姉さん的存在。でんこは修復できるのに超絶家電オンチ。少しいじくるだけで爆発物に変えてしまう......。"
+                    "name": "",
+                    "name_en": "",
+                    "id": null,
+                    "no": "",
+                    "element": "",
+                    "theme_color": "",
+                    "description": ""
                 };
 
                 leftFormElm = React.createElement(Dencoh, { denco: dummyObj });
