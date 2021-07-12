@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -n './node_modules/' ]; then
+if [ ! -d "node_modules" ] ; then
 
     if [ ! `node -v | grep -o 'v[0-9\.]*'`] || [ ! `npm -v | grep -o '[0-9\.]*'` ] ;then
         echo 'Installing nodejs and npm ...'
