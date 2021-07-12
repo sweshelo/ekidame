@@ -66,7 +66,6 @@ class Ekidame extends React.Component {
         fetch("data/denco.json")
             .then(res => res.json())
             .then((res)=>{
-                console.log(res);
                 this.setState({
                     dencohTable : res
                 });
