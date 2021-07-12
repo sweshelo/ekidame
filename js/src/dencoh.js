@@ -1,21 +1,25 @@
+var selectingDencoh = null;
+
 class Ekidame extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            leftForm : [
-                "reto", "reto", "reto", "reto", "reto", "reto", "reto"
-            ],
-            rightForm : [
-                "naru", "naru", "naru", "naru", "naru", "naru", "naru"
+            forms : [
+                [
+                    "reto", "reto", "reto", "reto", "reto", "reto", "reto"
+                ],
+                [
+                    "naru", "naru", "naru", "naru", "naru", "naru", "naru"
+                ]
             ],
             dencohTable : [],
             attacker : null,
-            blocker : null
+            blocker : null,
         }
     }
 
     render(){
-        var leftFormElm = [], rightFormElm = [];
+        var leftFormElm = [], rightFormElm = [], formsElements = [];
         var cnt = 1;
         if (this.state.dencohTable.length === 0){
             const dummyObj = {
@@ -30,17 +34,17 @@ class Ekidame extends React.Component {
 
             leftFormElm = <Dencoh denco={dummyObj} />;
         }else{
-            leftFormElm = this.state.leftForm.map((name)=>{
-                return this.state.dencohTable.find(e=>e.name_en == name)
-            }).map((denco, cnt)=>
-                <Dencoh denco={denco} position={cnt+1} />
-            );
 
-            rightFormElm = this.state.rightForm.map((name)=>{
-                return this.state.dencohTable.find(e=>e.name_en == name)
-            }).map((denco, cnt)=>
-                <Dencoh denco={denco} position={cnt+1} />
-            );
+            this.state.forms.forEach((e)=>{
+                formsElements.push(
+                e.map((formDencoName, formID)=>{
+                    return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
+                }).map((dencoObj, PositionID)=>{
+                    return <Dencoh denco={dencoObj} position={PositionID+1} func={()=>this.selectDencohWindowOpen(PositionID)} key={PositionID.toString()}/>
+                }));
+            });
+            console.log(formsElements);
+
         }
 
         return(
@@ -66,13 +70,13 @@ class Ekidame extends React.Component {
             </div>
             <div id="formations-wrapper">
             <div id="form-left" className="cf">
-            {leftFormElm}
+            {formsElements[0]}
             </div>
             <div id="form-right">
-            {rightFormElm}
+            {formsElements[1]}
             </div>
             </div>
-            <DencohSelector dataTable={this.state.dencohTable}/>
+            <DencohSelector dataTable={this.state.dencohTable} selectDencohFunc={this.choose} />
             </React.Fragment>
         );
     }
@@ -87,12 +91,30 @@ class Ekidame extends React.Component {
             })
     }
 
+    choose = (form, index)=>{
+        console.log(form, index);
+        hide();
+    }
+
+    selectDencohWindowOpen = (form, index)=>{
+        console.log(form, index);
+        //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
+        //this.setState(this.state.formations[form][index] : 'akehi');
+        $('#dencohSelectModal').removeClass('hide');
+    }
+
 
 }
 
+
+const hide = ()=>{
+    $('#dencohSelectModal').addClass('hide');
+    console.log('clicked');
+};
+
 function Dencoh(props){
     return(
-        <div className="denco-form">
+        <div className="denco-form" onClick={props.func}>
         <div className="denco-form-info">
         <div className="text-wrapper">
         <div className="denco-text">
@@ -113,6 +135,7 @@ function Dencoh(props){
 }
 
 function Dencoh_battle(props){
+
     return(
         <div className="denco" id={props.id}>
         <div className="text-wrapper">
@@ -140,17 +163,13 @@ function DencohSelector(props){
         "cool":[],
         "flat":[]
     };
+
     props.dataTable.forEach((denco)=>{
-        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} />);
+        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)}/>);
     })
 
-    let hide = ()=>{
-        $('#dencohSelectModal').addClass('hide');
-        console.log('clicked');
-    };
-
     return (
-        <div id="dencohSelectModal">
+        <div id="dencohSelectModal" className="hide">
         <input type="radio" id="elem-heat" name="elem" defaultChecked />
         <label className="elem-tab" htmlFor="elem-heat">heat</label>
         <input type="radio" id="elem-eco" name="elem" />
@@ -169,7 +188,7 @@ function DencohSelector(props){
 
     function DencohIcon(props){
         return(
-            <div className="dencoh-list-icon">
+            <div className="dencoh-list-icon" onClick={props.func}>
             <img src={"face/"+props.name+".png"} />
             </div>
         )

@@ -6,6 +6,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var selectingDencoh = null;
+
 var Ekidame = function (_React$Component) {
     _inherits(Ekidame, _React$Component);
 
@@ -24,9 +26,20 @@ var Ekidame = function (_React$Component) {
             });
         };
 
+        _this.choose = function (form, index) {
+            console.log(form, index);
+            hide();
+        };
+
+        _this.selectDencohWindowOpen = function (form, index) {
+            console.log(form, index);
+            //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
+            //this.setState(this.state.formations[form][index] : 'akehi');
+            $('#dencohSelectModal').removeClass('hide');
+        };
+
         _this.state = {
-            leftForm: ["reto", "reto", "reto", "reto", "reto", "reto", "reto"],
-            rightForm: ["naru", "naru", "naru", "naru", "naru", "naru", "naru"],
+            forms: [["reto", "reto", "reto", "reto", "reto", "reto", "reto"], ["naru", "naru", "naru", "naru", "naru", "naru", "naru"]],
             dencohTable: [],
             attacker: null,
             blocker: null
@@ -40,7 +53,8 @@ var Ekidame = function (_React$Component) {
             var _this2 = this;
 
             var leftFormElm = [],
-                rightFormElm = [];
+                rightFormElm = [],
+                formsElements = [];
             var cnt = 1;
             if (this.state.dencohTable.length === 0) {
                 var dummyObj = {
@@ -55,21 +69,19 @@ var Ekidame = function (_React$Component) {
 
                 leftFormElm = React.createElement(Dencoh, { denco: dummyObj });
             } else {
-                leftFormElm = this.state.leftForm.map(function (name) {
-                    return _this2.state.dencohTable.find(function (e) {
-                        return e.name_en == name;
-                    });
-                }).map(function (denco, cnt) {
-                    return React.createElement(Dencoh, { denco: denco, position: cnt + 1 });
-                });
 
-                rightFormElm = this.state.rightForm.map(function (name) {
-                    return _this2.state.dencohTable.find(function (e) {
-                        return e.name_en == name;
-                    });
-                }).map(function (denco, cnt) {
-                    return React.createElement(Dencoh, { denco: denco, position: cnt + 1 });
+                this.state.forms.forEach(function (e) {
+                    formsElements.push(e.map(function (formDencoName, formID) {
+                        return _this2.state.dencohTable.find(function (tableDencoObj) {
+                            return tableDencoObj.name_en == formDencoName;
+                        });
+                    }).map(function (dencoObj, PositionID) {
+                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, func: function func() {
+                                return _this2.selectDencohWindowOpen(PositionID);
+                            }, key: PositionID.toString() });
+                    }));
                 });
+                console.log(formsElements);
             }
 
             return React.createElement(
@@ -140,15 +152,15 @@ var Ekidame = function (_React$Component) {
                     React.createElement(
                         "div",
                         { id: "form-left", className: "cf" },
-                        leftFormElm
+                        formsElements[0]
                     ),
                     React.createElement(
                         "div",
                         { id: "form-right" },
-                        rightFormElm
+                        formsElements[1]
                     )
                 ),
-                React.createElement(DencohSelector, { dataTable: this.state.dencohTable })
+                React.createElement(DencohSelector, { dataTable: this.state.dencohTable, selectDencohFunc: this.choose })
             );
         }
     }]);
@@ -156,10 +168,15 @@ var Ekidame = function (_React$Component) {
     return Ekidame;
 }(React.Component);
 
+var hide = function hide() {
+    $('#dencohSelectModal').addClass('hide');
+    console.log('clicked');
+};
+
 function Dencoh(props) {
     return React.createElement(
         "div",
-        { className: "denco-form" },
+        { className: "denco-form", onClick: props.func },
         React.createElement(
             "div",
             { className: "denco-form-info" },
@@ -203,6 +220,7 @@ function Dencoh(props) {
 }
 
 function Dencoh_battle(props) {
+
     return React.createElement(
         "div",
         { className: "denco", id: props.id },
@@ -255,18 +273,16 @@ function DencohSelector(props) {
         "cool": [],
         "flat": []
     };
-    props.dataTable.forEach(function (denco) {
-        DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en }));
-    });
 
-    var hide = function hide() {
-        $('#dencohSelectModal').addClass('hide');
-        console.log('clicked');
-    };
+    props.dataTable.forEach(function (denco) {
+        DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en, func: function func() {
+                return props.selectDencohFunc(denco.name_en);
+            } }));
+    });
 
     return React.createElement(
         "div",
-        { id: "dencohSelectModal" },
+        { id: "dencohSelectModal", className: "hide" },
         React.createElement("input", { type: "radio", id: "elem-heat", name: "elem", defaultChecked: true }),
         React.createElement(
             "label",
@@ -321,7 +337,7 @@ function DencohSelector(props) {
     function DencohIcon(props) {
         return React.createElement(
             "div",
-            { className: "dencoh-list-icon" },
+            { className: "dencoh-list-icon", onClick: props.func },
             React.createElement("img", { src: "face/" + props.name + ".png" })
         );
     }
