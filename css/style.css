@@ -8,6 +8,16 @@ nav h1 {
   margin: 10px;
   text-align: center; }
 
+button {
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  border: solid 2px white;
+  background-color: silver;
+  box-shadow: gray 0 0 4px; }
+
 #app {
   width: 100%;
   position: relative;
@@ -61,7 +71,8 @@ nav h1 {
   #app #battle-wrapper {
     height: auto;
     margin-bottom: 10px;
-    overflow: hidden; }
+    overflow: hidden;
+    position: relative; }
   #app #battle-left {
     padding-left: 20px;
     text-align: left;
@@ -70,6 +81,32 @@ nav h1 {
     padding-right: 20px;
     text-align: right;
     float: right; }
+  #app #battle-config-wrapper {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    text-align: center;
+    padding-top: 10px; }
+    #app #battle-config-wrapper p {
+      font-size: 0.9em; }
+  #app #battle-config-open {
+    margin: 8px; }
+  #app .battle-result-wrapper {
+    margin: 5px; }
+    #app .battle-result-wrapper .battle-result-damage {
+      font-size: 0.75em; }
+    #app .battle-result-wrapper .battle-result-allow {
+      text-align: center;
+      background: green; }
+      #app .battle-result-wrapper .battle-result-allow p {
+        font-size: 0.8em;
+        color: white; }
+    #app .battle-result-wrapper #right {
+      clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 0 50%, 0 0); }
+    #app .battle-result-wrapper #left {
+      clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 10% 100%, 0% 50%, 10% 0%); }
   #app #formations-wrapper {
     margin-top: 20px;
     overflow: hidden; }
@@ -146,14 +183,6 @@ nav h1 {
           width: 100%;
           border-radius: 50%;
           border: #c0c0c0 solid 3px; }
-    #app #dencohSelectModal button {
-      margin: 5px;
-      padding: 5px 10px 5px 10px;
-      text-align: center;
-      border-radius: 5px;
-      border: solid 2px white;
-      background-color: silver;
-      box-shadow: gray 0 0 4px; }
 
 .smallest {
   font-size: 0.5em; }

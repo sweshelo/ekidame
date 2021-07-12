@@ -18,7 +18,6 @@ var Ekidame = function (_React$Component) {
             fetch("data/denco.json").then(function (res) {
                 return res.json();
             }).then(function (res) {
-                console.log(res);
                 _this.setState({
                     dencohTable: res
                 });
@@ -26,8 +25,8 @@ var Ekidame = function (_React$Component) {
         };
 
         _this.state = {
-            leftForm: ["", "", "", "", "", "", ""],
-            rightForm: ["", "", "", "", "", "", ""],
+            leftForm: ["reto", "reto", "reto", "reto", "reto", "reto", "reto"],
+            rightForm: ["naru", "naru", "naru", "naru", "naru", "naru", "naru"],
             dencohTable: [],
             attacker: null,
             blocker: null
@@ -80,6 +79,59 @@ var Ekidame = function (_React$Component) {
                     "div",
                     { id: "battle-wrapper" },
                     React.createElement(Dencoh_battle, { id: "battle-left", addClass: "mirror" }),
+                    React.createElement(
+                        "div",
+                        { id: "battle-config-wrapper" },
+                        React.createElement(
+                            "button",
+                            { id: "battle-config-open" },
+                            "\u8A2D\u5B9A"
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "battle-result-wrapper" },
+                            React.createElement(
+                                "div",
+                                { className: "battle-result-damage" },
+                                React.createElement(
+                                    "p",
+                                    null,
+                                    "9999 damage"
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "battle-result-allow", id: "right" },
+                                React.createElement(
+                                    "p",
+                                    null,
+                                    "attack"
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "battle-result-wrapper" },
+                            React.createElement(
+                                "div",
+                                { className: "battle-result-damage" },
+                                React.createElement(
+                                    "p",
+                                    null,
+                                    "9999 damage"
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "battle-result-allow", id: "left" },
+                                React.createElement(
+                                    "p",
+                                    null,
+                                    "counter"
+                                )
+                            )
+                        )
+                    ),
                     React.createElement(Dencoh_battle, { id: "battle-right" })
                 ),
                 React.createElement(

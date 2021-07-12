@@ -3,10 +3,10 @@ class Ekidame extends React.Component {
         super(props);
         this.state = {
             leftForm : [
-                "", "", "", "", "", "", ""
+                "reto", "reto", "reto", "reto", "reto", "reto", "reto"
             ],
             rightForm : [
-                "", "", "", "", "", "", ""
+                "naru", "naru", "naru", "naru", "naru", "naru", "naru"
             ],
             dencohTable : [],
             attacker : null,
@@ -47,6 +47,21 @@ class Ekidame extends React.Component {
             <React.Fragment>
             <div id="battle-wrapper">
             <Dencoh_battle id="battle-left" addClass="mirror" />
+            <div id="battle-config-wrapper">
+            <button id="battle-config-open">設定</button>
+            <div className="battle-result-wrapper">
+            <div className="battle-result-damage"><p>9999 damage</p></div>
+            <div className={"battle-result-allow"} id="right">
+            <p>attack</p>
+            </div>
+            </div>
+            <div className="battle-result-wrapper">
+            <div className="battle-result-damage"><p>9999 damage</p></div>
+            <div className={"battle-result-allow"} id="left">
+            <p>counter</p>
+            </div>
+            </div>
+            </div>
             <Dencoh_battle id="battle-right" />
             </div>
             <div id="formations-wrapper">
