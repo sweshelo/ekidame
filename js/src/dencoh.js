@@ -15,11 +15,12 @@ class Ekidame extends React.Component {
             dencohTable : [],
             attacker : null,
             blocker : null,
+            keyFlg : false,
         }
     }
 
     render(){
-        var leftFormElm = [], rightFormElm = [], formsElements = [];
+        var formsElements = [];
         var cnt = 1;
         if (this.state.dencohTable.length === 0){
             const dummyObj = {
@@ -32,7 +33,7 @@ class Ekidame extends React.Component {
                 "description": ""
             };
 
-            leftFormElm = <Dencoh denco={dummyObj} />;
+            return null;
         }else{
 
             this.state.forms.forEach((e)=>{
@@ -40,7 +41,8 @@ class Ekidame extends React.Component {
                 e.map((formDencoName, formID)=>{
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
-                    return <Dencoh denco={dencoObj} position={PositionID+1} func={()=>this.selectDencohWindowOpen(PositionID)} key={PositionID.toString()}/>
+                    key = Math.floor(Math.random()*0xFFFFFF);
+                    return <Dencoh denco={dencoObj} position={PositionID+1} func={()=>this.selectDencohWindowOpen(PositionID, key)} key={key}/>
                 }));
             });
             console.log(formsElements);
@@ -91,18 +93,18 @@ class Ekidame extends React.Component {
             })
     }
 
-    choose = (form, index)=>{
-        console.log(form, index);
+    choose = (form)=>{
+        console.log(form, selectingDencoh);
         hide();
     }
 
-    selectDencohWindowOpen = (form, index)=>{
-        console.log(form, index);
+    selectDencohWindowOpen = (index, key)=>{
+        console.log(index, key);
+        selectingDencoh = key;
         //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
         //this.setState(this.state.formations[form][index] : 'akehi');
         $('#dencohSelectModal').removeClass('hide');
     }
-
 
 }
 
@@ -165,7 +167,7 @@ function DencohSelector(props){
     };
 
     props.dataTable.forEach((denco)=>{
-        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)}/>);
+        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)} key={Math.floor(Math.random()*0xFFFFFF)}/>);
     })
 
     return (

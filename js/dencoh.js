@@ -26,13 +26,14 @@ var Ekidame = function (_React$Component) {
             });
         };
 
-        _this.choose = function (form, index) {
-            console.log(form, index);
+        _this.choose = function (form) {
+            console.log(form, selectingDencoh);
             hide();
         };
 
-        _this.selectDencohWindowOpen = function (form, index) {
-            console.log(form, index);
+        _this.selectDencohWindowOpen = function (index, key) {
+            console.log(index, key);
+            selectingDencoh = key;
             //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
             //this.setState(this.state.formations[form][index] : 'akehi');
             $('#dencohSelectModal').removeClass('hide');
@@ -42,7 +43,8 @@ var Ekidame = function (_React$Component) {
             forms: [["reto", "reto", "reto", "reto", "reto", "reto", "reto"], ["naru", "naru", "naru", "naru", "naru", "naru", "naru"]],
             dencohTable: [],
             attacker: null,
-            blocker: null
+            blocker: null,
+            keyFlg: false
         };
         return _this;
     }
@@ -52,9 +54,7 @@ var Ekidame = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var leftFormElm = [],
-                rightFormElm = [],
-                formsElements = [];
+            var formsElements = [];
             var cnt = 1;
             if (this.state.dencohTable.length === 0) {
                 var dummyObj = {
@@ -67,7 +67,7 @@ var Ekidame = function (_React$Component) {
                     "description": ""
                 };
 
-                leftFormElm = React.createElement(Dencoh, { denco: dummyObj });
+                return null;
             } else {
 
                 this.state.forms.forEach(function (e) {
@@ -76,9 +76,10 @@ var Ekidame = function (_React$Component) {
                             return tableDencoObj.name_en == formDencoName;
                         });
                     }).map(function (dencoObj, PositionID) {
+                        key = Math.floor(Math.random() * 0xFFFFFF);
                         return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, func: function func() {
-                                return _this2.selectDencohWindowOpen(PositionID);
-                            }, key: PositionID.toString() });
+                                return _this2.selectDencohWindowOpen(PositionID, key);
+                            }, key: key });
                     }));
                 });
                 console.log(formsElements);
@@ -277,7 +278,7 @@ function DencohSelector(props) {
     props.dataTable.forEach(function (denco) {
         DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en, func: function func() {
                 return props.selectDencohFunc(denco.name_en);
-            } }));
+            }, key: Math.floor(Math.random() * 0xFFFFFF) }));
     });
 
     return React.createElement(
