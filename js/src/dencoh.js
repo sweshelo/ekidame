@@ -1,5 +1,3 @@
-var selectingDencoh = null;
-
 class Ekidame extends React.Component {
     constructor(props){
         super(props);
@@ -16,6 +14,7 @@ class Ekidame extends React.Component {
             attacker : null,
             blocker : null,
             keyFlg : false,
+            selectingDencoh : null,
         }
     }
 
@@ -42,7 +41,7 @@ class Ekidame extends React.Component {
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
                     key = Math.floor(Math.random()*0xFFFFFF);
-                    return <Dencoh denco={dencoObj} position={PositionID+1} func={()=>this.selectDencohWindowOpen(PositionID, key)} key={key}/>
+                    return <Dencoh denco={dencoObj} position={PositionID+1} func={this.selectDencohWindowOpen} key={key}/>
                 }));
             });
             console.log(formsElements);
@@ -94,15 +93,20 @@ class Ekidame extends React.Component {
     }
 
     choose = (form)=>{
-        console.log(form, selectingDencoh);
+        console.log(form, this.state.selectingDencoh);
+        //this.state.selectingDencoh;
+        const replace = this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == form);
+        this.state.selectingDencoh.denco = replace;
+        console.log(replace);
         hide();
     }
 
-    selectDencohWindowOpen = (index, key)=>{
-        console.log(index, key);
-        selectingDencoh = key;
-        //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
-        //this.setState(this.state.formations[form][index] : 'akehi');
+    selectDencohWindowOpen = (props)=>{
+        console.log('windowOpen', props);
+        this.setState({
+            selectingDencoh : props
+        });
+        console.log(this.state.selectingDencoh);
         $('#dencohSelectModal').removeClass('hide');
     }
 
@@ -116,7 +120,7 @@ const hide = ()=>{
 
 function Dencoh(props){
     return(
-        <div className="denco-form" onClick={props.func}>
+        <div className="denco-form" onClick={()=>props.func(props)}>
         <div className="denco-form-info">
         <div className="text-wrapper">
         <div className="denco-text">

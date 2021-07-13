@@ -6,8 +6,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var selectingDencoh = null;
-
 var Ekidame = function (_React$Component) {
     _inherits(Ekidame, _React$Component);
 
@@ -16,35 +14,15 @@ var Ekidame = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Ekidame.__proto__ || Object.getPrototypeOf(Ekidame)).call(this, props));
 
-        _this.componentDidMount = function () {
-            fetch("data/denco.json").then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                _this.setState({
-                    dencohTable: res
-                });
-            });
-        };
-
-        _this.choose = function (form) {
-            console.log(form, selectingDencoh);
-            hide();
-        };
-
-        _this.selectDencohWindowOpen = function (index, key) {
-            console.log(index, key);
-            selectingDencoh = key;
-            //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
-            //this.setState(this.state.formations[form][index] : 'akehi');
-            $('#dencohSelectModal').removeClass('hide');
-        };
+        _initialiseProps.call(_this);
 
         _this.state = {
             forms: [["reto", "reto", "reto", "reto", "reto", "reto", "reto"], ["naru", "naru", "naru", "naru", "naru", "naru", "naru"]],
             dencohTable: [],
             attacker: null,
             blocker: null,
-            keyFlg: false
+            keyFlg: false,
+            selectingDencoh: null
         };
         return _this;
     }
@@ -77,9 +55,7 @@ var Ekidame = function (_React$Component) {
                         });
                     }).map(function (dencoObj, PositionID) {
                         key = Math.floor(Math.random() * 0xFFFFFF);
-                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, func: function func() {
-                                return _this2.selectDencohWindowOpen(PositionID, key);
-                            }, key: key });
+                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, func: _this2.selectDencohWindowOpen, key: key });
                     }));
                 });
                 console.log(formsElements);
@@ -169,6 +145,40 @@ var Ekidame = function (_React$Component) {
     return Ekidame;
 }(React.Component);
 
+var _initialiseProps = function _initialiseProps() {
+    var _this3 = this;
+
+    this.componentDidMount = function () {
+        fetch("data/denco.json").then(function (res) {
+            return res.json();
+        }).then(function (res) {
+            _this3.setState({
+                dencohTable: res
+            });
+        });
+    };
+
+    this.choose = function (form) {
+        console.log(form, _this3.state.selectingDencoh);
+        //this.state.selectingDencoh;
+        var replace = _this3.state.dencohTable.find(function (tableDencoObj) {
+            return tableDencoObj.name_en == form;
+        });
+        _this3.state.selectingDencoh.denco = replace;
+        console.log(replace);
+        hide();
+    };
+
+    this.selectDencohWindowOpen = function (props) {
+        console.log('windowOpen', props);
+        _this3.setState({
+            selectingDencoh: props
+        });
+        console.log(_this3.state.selectingDencoh);
+        $('#dencohSelectModal').removeClass('hide');
+    };
+};
+
 var hide = function hide() {
     $('#dencohSelectModal').addClass('hide');
     console.log('clicked');
@@ -177,7 +187,9 @@ var hide = function hide() {
 function Dencoh(props) {
     return React.createElement(
         "div",
-        { className: "denco-form", onClick: props.func },
+        { className: "denco-form", onClick: function onClick() {
+                return props.func(props);
+            } },
         React.createElement(
             "div",
             { className: "denco-form-info" },
