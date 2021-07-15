@@ -42,7 +42,7 @@ class Ekidame extends React.Component {
                 e.map((formDencoName, formID)=>{
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
-                    key = formation + "/" + PositionID;
+                    key = formationID + "/" + PositionID;
                     return <Dencoh denco={dencoObj} position={PositionID+1} formation={formationID} func={this.selectDencohWindowOpen} key={key}/>
                 }));
             });
@@ -178,7 +178,7 @@ function DencohSelector(props){
     };
 
     props.dataTable.forEach((denco)=>{
-        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)} key={Math.floor(Math.random()*0xFFFFFF)}/>);
+        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)} key={denco.name_en}/>);
     })
 
     return (
