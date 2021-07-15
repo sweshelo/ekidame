@@ -35,15 +35,15 @@ class Ekidame extends React.Component {
             return null;
         }else{
 
-            cnt=0;
+            let formationID = 0;
             this.state.forms.forEach((e)=>{
-                cnt++;
+                formationID++;
                 formsElements.push(
                 e.map((formDencoName, formID)=>{
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
-                    key = Math.floor(Math.random()*0xFFFFFF);
-                    return <Dencoh denco={dencoObj} position={PositionID+1} formation={cnt} func={this.selectDencohWindowOpen} key={key}/>
+                    key = formation + "/" + PositionID;
+                    return <Dencoh denco={dencoObj} position={PositionID+1} formation={formationID} func={this.selectDencohWindowOpen} key={key}/>
                 }));
             });
             console.log(formsElements);
