@@ -1,6 +1,6 @@
 .sass-cache/*
-face/*
-style.css*
+img/*
+css/style.css*
 data/*
-*.json
+js/*.json
 js/node_modules
