@@ -48,16 +48,16 @@ var Ekidame = function (_React$Component) {
                 return null;
             } else {
 
-                cnt = 0;
+                var formationID = 0;
                 this.state.forms.forEach(function (e) {
-                    cnt++;
+                    formationID++;
                     formsElements.push(e.map(function (formDencoName, formID) {
                         return _this2.state.dencohTable.find(function (tableDencoObj) {
                             return tableDencoObj.name_en == formDencoName;
                         });
                     }).map(function (dencoObj, PositionID) {
-                        key = Math.floor(Math.random() * 0xFFFFFF);
-                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, formation: cnt, func: _this2.selectDencohWindowOpen, key: key });
+                        key = formationID + "/" + PositionID;
+                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, formation: formationID, func: _this2.selectDencohWindowOpen, key: key });
                     }));
                 });
                 console.log(formsElements);
@@ -232,8 +232,8 @@ function Dencoh(props) {
             React.createElement(
                 "div",
                 { className: "image-wrapper" },
-                React.createElement("img", { src: "data/icon_denco_" + props.denco.element + ".png", className: "element-icon" }),
-                React.createElement("img", { src: "face/" + props.denco.name_en + ".png", className: "denco-image" })
+                React.createElement("img", { src: "img/icon_denco_" + props.denco.element + ".png", className: "element-icon" }),
+                React.createElement("img", { src: "img/face/" + props.denco.name_en + ".png", className: "denco-image" })
             )
         )
     );
@@ -261,8 +261,8 @@ function Dencoh_battle(props) {
         React.createElement(
             "div",
             { className: "image-wrapper " + props.addClass },
-            React.createElement("img", { src: "data/icon_denco_eco.png", className: "element-icon" }),
-            React.createElement("img", { src: "face/reto.png", className: "denco-image" })
+            React.createElement("img", { src: "img/icon_denco_eco.png", className: "element-icon" }),
+            React.createElement("img", { src: "img/face/reto.png", className: "denco-image" })
         ),
         React.createElement(
             "div",
@@ -297,7 +297,7 @@ function DencohSelector(props) {
     props.dataTable.forEach(function (denco) {
         DencohElem[denco.element].push(React.createElement(DencohIcon, { name: denco.name_en, func: function func() {
                 return props.selectDencohFunc(denco.name_en);
-            }, key: Math.floor(Math.random() * 0xFFFFFF) }));
+            }, key: denco.name_en }));
     });
 
     return React.createElement(
@@ -358,7 +358,7 @@ function DencohSelector(props) {
         return React.createElement(
             "div",
             { className: "dencoh-list-icon", onClick: props.func },
-            React.createElement("img", { src: "face/" + props.name + ".png" })
+            React.createElement("img", { src: "img/face/" + props.name + ".png" })
         );
     }
 }

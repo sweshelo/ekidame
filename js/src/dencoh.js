@@ -139,8 +139,8 @@ function Dencoh(props){
         </div>
         </div>
         <div className="image-wrapper">
-        <img src={"data/icon_denco_"+props.denco.element+".png"} className="element-icon" />
-        <img src={"face/"+props.denco.name_en+".png"} className="denco-image" />
+        <img src={"img/icon_denco_"+props.denco.element+".png"} className="element-icon" />
+        <img src={"img/face/"+props.denco.name_en+".png"} className="denco-image" />
         </div>
         </div>
         </div>
@@ -156,8 +156,8 @@ function Dencoh_battle(props){
         <p>リト Lv.80</p>
         </div>
         <div className={"image-wrapper " + props.addClass}>
-        <img src="data/icon_denco_eco.png" className="element-icon" />
-        <img src="face/reto.png" className="denco-image" />
+        <img src="img/icon_denco_eco.png" className="element-icon" />
+        <img src="img/face/reto.png" className="denco-image" />
         </div>
         <div className="status-wrapper">
         <p>HP 999 / 999</p>
@@ -202,7 +202,7 @@ function DencohSelector(props){
     function DencohIcon(props){
         return(
             <div className="dencoh-list-icon" onClick={props.func}>
-            <img src={"face/"+props.name+".png"} />
+            <img src={"img/face/"+props.name+".png"} />
             </div>
         )
     }
