@@ -35,13 +35,15 @@ class Ekidame extends React.Component {
             return null;
         }else{
 
+            cnt=0;
             this.state.forms.forEach((e)=>{
+                cnt++;
                 formsElements.push(
                 e.map((formDencoName, formID)=>{
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
                     key = Math.floor(Math.random()*0xFFFFFF);
-                    return <Dencoh denco={dencoObj} position={PositionID+1} func={this.selectDencohWindowOpen} key={key}/>
+                    return <Dencoh denco={dencoObj} position={PositionID+1} formation={cnt} func={this.selectDencohWindowOpen} key={key}/>
                 }));
             });
             console.log(formsElements);
@@ -97,7 +99,12 @@ class Ekidame extends React.Component {
         //this.state.selectingDencoh;
         const replace = this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == form);
         this.state.selectingDencoh.denco = replace;
-        console.log(replace);
+        console.log(replace, this.state.selectingDencoh, "<= SWAP");
+        const formsClone = this.state.forms.slice();
+        formsClone[this.state.selectingDencoh.formation-1][this.state.selectingDencoh.position-1] = replace.name_en;
+        this.setState({
+            forms : formsClone
+        })
         hide();
     }
 

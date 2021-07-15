@@ -48,14 +48,16 @@ var Ekidame = function (_React$Component) {
                 return null;
             } else {
 
+                cnt = 0;
                 this.state.forms.forEach(function (e) {
+                    cnt++;
                     formsElements.push(e.map(function (formDencoName, formID) {
                         return _this2.state.dencohTable.find(function (tableDencoObj) {
                             return tableDencoObj.name_en == formDencoName;
                         });
                     }).map(function (dencoObj, PositionID) {
                         key = Math.floor(Math.random() * 0xFFFFFF);
-                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, func: _this2.selectDencohWindowOpen, key: key });
+                        return React.createElement(Dencoh, { denco: dencoObj, position: PositionID + 1, formation: cnt, func: _this2.selectDencohWindowOpen, key: key });
                     }));
                 });
                 console.log(formsElements);
@@ -165,7 +167,12 @@ var _initialiseProps = function _initialiseProps() {
             return tableDencoObj.name_en == form;
         });
         _this3.state.selectingDencoh.denco = replace;
-        console.log(replace);
+        console.log(replace, _this3.state.selectingDencoh, "<= SWAP");
+        var formsClone = _this3.state.forms.slice();
+        formsClone[_this3.state.selectingDencoh.formation - 1][_this3.state.selectingDencoh.position - 1] = replace.name_en;
+        _this3.setState({
+            forms: formsClone
+        });
         hide();
     };
 
