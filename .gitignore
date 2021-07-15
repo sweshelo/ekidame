@@ -3,3 +3,4 @@ img/*
 css/style.css*
 js/*.json
 js/node_modules
+hook/
