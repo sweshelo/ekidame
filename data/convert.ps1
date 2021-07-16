@@ -7,8 +7,8 @@ function get-Object($key){
 }
 
 
-$d = import-csv data.txt -Header (@("id", "name")+@(1..80)+@("element", "type")+@(81..160))
-$j = cat .\denco.json | ConvertFrom-Json
+$d = import-csv ./rawdata/data.txt -Header (@("id", "name")+@(1..80)+@("element", "type")+@(81..160))
+$j = cat ./rawdata/denco.json | ConvertFrom-Json
 $return = @()
 
 $d | %{
