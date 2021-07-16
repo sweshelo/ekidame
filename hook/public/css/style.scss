@@ -1,0 +1,269 @@
+body{
+    font-size : 1.0em;
+    font-family : 'M PLUS Rounded 1c';
+    background : #f0f0f0;
+}
+nav{
+    h1{
+        margin : 10px;
+        text-align : center;
+    }
+}
+
+button{
+    background : #f4f4f4;
+    margin : 5px;
+    padding : 5px 10px 5px 10px;
+    text-align : center;
+    border-radius : 5px;
+    border : solid 2px white;
+    background-color : silver;
+    box-shadow : gray 0 0 4px;
+}
+
+#app{
+    width : 100%;
+    position : relative;
+
+    .denco{
+        width : 50%;
+
+        background : #fafafa;
+        .image-wrapper{
+            text-align : right;
+            pointer-events : none;
+            .element-icon{
+                width : 20px;
+            }
+        }
+        .text-wrapper{
+            margin-top :  5px;
+            padding-top : 5px;
+        }
+        .status-wrapper{
+            padding : 5px;
+        }
+    }
+
+    .mirror{
+        transform: scale(-1, 1);
+    }
+
+    .denco-form{
+        width : 100%;
+        background : #fafafa;
+        box-shadow : #a0a0a0 2px 2px 5px;
+        //padding :5px;
+        margin-top : 3px;
+
+        .denco-form-info{
+            overflow : hidden;
+            .image-wrapper{
+                float : right;
+                z-index : 0;
+                position : relative;
+                .element-icon{
+                    pointer-events : none;
+                    position : absolute;
+                    left : 50px;
+                    top : 50px;
+                    width : 20px;
+                }
+                .denco-image{
+                    pointer-events : none;
+                    left : 50px;
+                }
+            }
+            .text-wrapper{
+                z-index : 10;
+                padding : 5px;
+                position : absolute;
+                .denco-name{
+                    padding : 2px;
+                }
+                .skill-text{
+                    background : #f0f0ff;
+                    border-radius : 5px;
+                    padding : 4px;
+                    opacity : 0.8;
+                }
+            }
+        }
+
+    }
+
+    #battle-wrapper{
+        height : auto;
+        margin-bottom : 10px;
+        overflow : hidden;
+        position : relative;
+    }
+
+    #battle-left{
+        padding-left : 20px;
+        text-align : left;
+        float : left;
+    }
+
+    #battle-right{
+        padding-right : 20px;
+        text-align : right;
+        float : right;
+    }
+
+    #battle-config-wrapper{
+        position : absolute;
+        z-index : 5;
+        left : 50%;
+        transform : translateX(-50%);
+        width : 30%;
+        text-align : center;
+        padding-top : 10px;
+        p{
+            font-size : 0.9em;
+        }
+    }
+
+    #battle-config-open{
+        margin : 8px;
+    }
+
+    .battle-result-wrapper{
+
+        margin : 5px;
+
+        .battle-result-damage{
+            font-size : 0.75em;
+        }
+
+        .battle-result-allow{
+            text-align : center;
+            background : green;
+
+            p{
+                font-size : 0.8em;
+                color : white;
+            }
+
+        }
+
+        #right{
+            clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 0 50%, 0 0);
+        }
+
+        #left{
+            clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 10% 100%, 0% 50%, 10% 0%);
+        }
+
+    }
+
+    #formations-wrapper{
+        margin-top : 20px;
+        overflow : hidden;
+    }
+
+    #form-left{
+        width : 48%;
+        padding-left : 10px;
+        float : left;
+    }
+    #form-right{
+        width : 48%;
+        padding-right : 10px;
+        float : right;
+    }
+
+    /* micro clearfx */
+    .cf:before, .cf:after {
+        content:"";
+        display:table
+    }
+    .cf:after { clear:both }
+
+    #dencohSelectModal{
+        position : absolute;
+        opacity : 0.9;
+        background : white;
+        box-shadow : gray 0px 0px 6px;
+        top : 10px;
+        left : 5%;
+        width : 90%;
+        z-index : 20;
+        border-radius : 8px;
+        text-align : center;
+
+        padding : 10px;
+
+        label{
+            width : calc(100%/4);
+            float : left;
+            text-align : center;
+            padding : 3px 0 3px 0;
+            border-radius : 4px 4px 0 0;
+        }
+
+        input{
+            display : none;
+        }
+
+        /*タブ切り替えの中身のスタイル*/
+        .dencoh-list {
+            display: none;
+            clear: both;
+            overflow: hidden;
+        }
+
+        /*選択されているタブのコンテンツのみを表示*/
+        #elem-heat:checked ~ #elem-heat-dencoh,
+        #elem-eco:checked ~ #elem-eco-dencoh,
+        #elem-cool:checked ~ #elem-cool-dencoh,
+        #elem-flat:checked ~ #elem-flat-dencoh{
+            display: block;
+        }
+
+        $heat : #ff7f50;
+        $eco  : #11bb22;
+        $cool : #5ab4bd;
+        $flat : #dcdcdc;
+
+        & input[id="elem-heat"]:checked + .elem-tab { background-color: $heat; }
+        & input[id="elem-eco" ]:checked + .elem-tab { background-color: $eco; }
+        & input[id="elem-cool"]:checked + .elem-tab { background-color: $cool; }
+        & input[id="elem-flat"]:checked + .elem-tab { background-color: $flat; }
+
+        .heat-color{ background-color : $heat }
+        .eco-color { background-color : $eco }
+        .cool-color{ background-color : $cool }
+        .flat-color{ background-color : $flat }
+
+        .dencoh-list{
+            padding : 10px 5% 10px 5%;
+            border-radius : 0 0 4px 4px;
+            .dencoh-list-icon{
+                float : left;
+                width : calc(100%/6);
+                padding : 1px;
+                img{
+                    pointer-events : none;
+                    background-color : white;
+                    width : 100%;
+                    border-radius : 50%;
+                    border : #c0c0c0 solid 3px;
+                }
+            }
+        }
+
+    }
+}
+
+.smallest{
+    font-size : 0.5em;
+}
+
+.small{
+    font-size : 0.7em;
+}
+
+.hide{
+    display : none;
+}
