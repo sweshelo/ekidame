@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
+import BattleDencoh from './Battle.dencoh';
 
 function Battle(props){
     return(
         <div>
-            <p>{props.battler[0]}</p>
-            <p>{props.battler[1]}</p>
+            <BattleDencoh dencoh={props.battler[0]} />
+            <BattleDencoh dencoh={props.battler[1]} />
         </div>
     )
 }

@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
     const TemplateFormation = [
-        ['Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty'],
+        ['reto', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty'],
         ['Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty']
     ];
     const TemplateBattler = [ 0, 0 ];
@@ -19,9 +19,11 @@ function App() {
     const [count, setCount] = useState(0);
     var dencohTable = [];
 
+    var selectDencohWindow = false;
+
     //componentDidMount
     useEffect(()=> {
-        fetch("data/denco.json")
+        fetch("https://scripts.sweshelo.jp/data.json")
             .then(res => res.json())
             .then((res)=>{
                 dencohTable = res;
