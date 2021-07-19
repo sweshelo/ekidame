@@ -16,6 +16,7 @@ class Ekidame extends React.Component {
             attacker : null,
             blocker : null,
             keyFlg : false,
+            selectingDencoh : null,
         }
     }
 
@@ -36,13 +37,15 @@ class Ekidame extends React.Component {
             return null;
         }else{
 
+            let formationID = 0;
             this.state.forms.forEach((e)=>{
+                formationID++;
                 formsElements.push(
                 e.map((formDencoName, formID)=>{
                     return this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == formDencoName);
                 }).map((dencoObj, PositionID)=>{
-                    key = Math.floor(Math.random()*0xFFFFFF);
-                    return <Dencoh denco={dencoObj} position={PositionID+1} func={()=>this.selectDencohWindowOpen(PositionID, key)} key={key}/>
+                    key = formationID + "/" + PositionID;
+                    return <Dencoh denco={dencoObj} position={PositionID+1} formation={formationID} func={this.selectDencohWindowOpen} key={key}/>
                 }));
             });
             console.log(formsElements);
@@ -94,15 +97,25 @@ class Ekidame extends React.Component {
     }
 
     choose = (form)=>{
-        console.log(form, selectingDencoh);
+        console.log(form, this.state.selectingDencoh);
+        //this.state.selectingDencoh;
+        const replace = this.state.dencohTable.find(tableDencoObj=>tableDencoObj.name_en == form);
+        this.state.selectingDencoh.denco = replace;
+        console.log(replace, this.state.selectingDencoh, "<= SWAP");
+        const formsClone = this.state.forms.slice();
+        formsClone[this.state.selectingDencoh.formation-1][this.state.selectingDencoh.position-1] = replace.name_en;
+        this.setState({
+            forms : formsClone
+        })
         hide();
     }
 
-    selectDencohWindowOpen = (index, key)=>{
-        console.log(index, key);
-        selectingDencoh = key;
-        //const replaceTarget = this.state.dencohTable.find(e=>e.name_en == d);
-        //this.setState(this.state.formations[form][index] : 'akehi');
+    selectDencohWindowOpen = (props)=>{
+        console.log('windowOpen', props);
+        this.setState({
+            selectingDencoh : props
+        });
+        console.log(this.state.selectingDencoh);
         $('#dencohSelectModal').removeClass('hide');
     }
 
@@ -116,7 +129,7 @@ const hide = ()=>{
 
 function Dencoh(props){
     return(
-        <div className="denco-form" onClick={props.func}>
+        <div className="denco-form" onClick={()=>props.func(props)}>
         <div className="denco-form-info">
         <div className="text-wrapper">
         <div className="denco-text">
@@ -128,8 +141,8 @@ function Dencoh(props){
         </div>
         </div>
         <div className="image-wrapper">
-        <img src={"data/icon_denco_"+props.denco.element+".png"} className="element-icon" />
-        <img src={"face/"+props.denco.name_en+".png"} className="denco-image" />
+        <img src={"img/icon_denco_"+props.denco.element+".png"} className="element-icon" />
+        <img src={"img/face/"+props.denco.name_en+".png"} className="denco-image" />
         </div>
         </div>
         </div>
@@ -145,8 +158,8 @@ function Dencoh_battle(props){
         <p>リト Lv.80</p>
         </div>
         <div className={"image-wrapper " + props.addClass}>
-        <img src="data/icon_denco_eco.png" className="element-icon" />
-        <img src="face/reto.png" className="denco-image" />
+        <img src="img/icon_denco_eco.png" className="element-icon" />
+        <img src="img/face/reto.png" className="denco-image" />
         </div>
         <div className="status-wrapper">
         <p>HP 999 / 999</p>
@@ -167,7 +180,7 @@ function DencohSelector(props){
     };
 
     props.dataTable.forEach((denco)=>{
-        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)} key={Math.floor(Math.random()*0xFFFFFF)}/>);
+        DencohElem[denco.element].push(<DencohIcon name={denco.name_en} func={()=>props.selectDencohFunc(denco.name_en)} key={denco.name_en}/>);
     })
 
     return (
@@ -191,7 +204,7 @@ function DencohSelector(props){
     function DencohIcon(props){
         return(
             <div className="dencoh-list-icon" onClick={props.func}>
-            <img src={"face/"+props.name+".png"} />
+            <img src={"img/face/"+props.name+".png"} />
             </div>
         )
     }
