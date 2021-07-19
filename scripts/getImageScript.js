@@ -24,8 +24,10 @@ const main = async ()=>{
         .then(res => res.json())
         .then(res => {
             Promise.all(res.map(dencoh =>(
-                fetch (parseURL(dencoh.name_en)).then(image => {
-                    zip.file(dencoh.name_en + ".png", image.blob());
+                fetch (parseURL(dencoh.name_en)).then(res => {
+                    if(res.ok){
+                        zip.file(dencoh.name_en + ".png", res.blob());
+                    }
                 })
             ))).then(()=>{
                 console.log('yay!');
