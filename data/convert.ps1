@@ -25,7 +25,7 @@ $d | %{
     $no = $r.no
     $element = $r.element
     $theme_color = $r.theme_color
-    $description = $r.description
+    $description = $r.description -replace '"', '\"' 
 
     $hp = "$hp" -replace " ",", ";
     $ap = "$ap" -replace " ",", ";
