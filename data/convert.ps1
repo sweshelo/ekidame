@@ -11,6 +11,8 @@ $d = import-csv ./rawdata/data.txt -Header (@("id", "name")+@(1..80)+@("element"
 $j = cat ./rawdata/denco.json | ConvertFrom-Json
 $return = @()
 
+"[" > data.json
+
 $d | %{
     $denco = $_
     $hp = @()
@@ -22,7 +24,7 @@ $d | %{
     #echo $r
     $name = $r.name
     $name_en=$r.name_en
-    $no = $r.no
+    $no = [int]$r.no
     $element = $r.element
     $theme_color = $r.theme_color
     $description = $r.description -replace '"', '\"' 
@@ -44,3 +46,5 @@ $d | %{
 "@ >> data.json
 
 }
+
+"]" >> data.json
