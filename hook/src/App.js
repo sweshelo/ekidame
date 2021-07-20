@@ -1,22 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
-import Dencoh from './Dencoh';
 import Battle from './Battle';
+import Modal from './Modal';
+import Formation from './Formation';
 import './App.css';
 
 function App() {
-    const TemplateFormation = [
-        ['reto', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty'],
-        ['Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty']
-    ];
+
+    //テンプレ
+    const TemplateFormation = ['reto'];
     const TemplateBattler = [ 0, 0 ];
 
-    var [formation, setFormation] = useState(TemplateFormation);
+    //編成
+    var [formA, setFormA] = useState(TemplateFormation);
+    var [formB, setFormB] = useState(TemplateFormation);
+    var formations = [formA, formB];
+    var setFormations = [setFormA, setFormB];
+
+    //アタッカー / ブロッカー
     var [battler, setBattler] = useState(TemplateBattler);
 
-    var dataLoadFlag = false;
-
-    const [count, setCount] = useState(0);
+    //でんこ情報テーブル
     var dencohTable = [];
 
     var selectDencohWindow = false;
@@ -30,16 +33,29 @@ function App() {
             });
     },[]);
 
-    //編成変更
-    const changeFormation = ()=> {
-        setCount(count + 1);
-        console.log('called : changeFormation')
+    //編成をクリア
+    const clearFormation = (formationId)=> {
+        setFormations[formationId]([]);
+    };
+
+    //編成に追加
+    const addFormation = (formationId, dencohName)=>{
+        let newArr = [...formations[formationId]];
+        newArr.push(dencohName);
+        console.log(newArr);
+        setFormations[formationId](newArr);
     };
 
     return (
         <div className="App">
         <Battle battler={battler} />
-        <button onClick={changeFormation}>{count}</button>
+        <Formation dencohs={formA} formId={0} />
+        <Formation dencohs={formB} formId={1} />
+        <button onClick={()=>{addFormation(0, 'reto')}}>add reto</button>
+        <button onClick={()=>{addFormation(1, 'chizu')}}>add chizu</button>
+        <button onClick={()=>{clearFormation(0)}}>clear 1</button>
+        <button onClick={()=>{clearFormation(1)}}>clear 2</button>
+        <Modal />
         </div>
     );
 }

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-function Dencoh(){
+function Dencoh(props){
     return(
         <>
-        <p>Hello</p>
+        <p>{props.name}</p>
         </>
     )
 }
