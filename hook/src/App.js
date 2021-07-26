@@ -20,16 +20,16 @@ function App() {
     var [battler, setBattler] = useState(TemplateBattler);
 
     //でんこ情報テーブル
-    var dencohTable = [];
+    var [dencohTable, setDencohTable] = useState([]);
 
     var selectDencohWindow = false;
 
     //componentDidMount
     useEffect(()=> {
-        fetch("https://scripts.sweshelo.jp/data.json")
+        fetch("data/data.json")
             .then(res => res.json())
             .then((res)=>{
-                dencohTable = res;
+                setDencohTable(res);
             });
     },[]);
 
@@ -48,6 +48,7 @@ function App() {
 
     return (
         <div className="App">
+        <p>ekidame - 駅メモ! ダメージ計算ツール</p>
         <Battle battler={battler} />
         <Formation dencohs={formA} formId={0} />
         <Formation dencohs={formB} formId={1} />
@@ -55,7 +56,7 @@ function App() {
         <button onClick={()=>{addFormation(1, 'chizu')}}>add chizu</button>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal />
+        <Modal table={dencohTable} addFunc={addFormation}/>
         </div>
     );
 }
