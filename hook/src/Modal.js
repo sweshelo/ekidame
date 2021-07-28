@@ -1,11 +1,13 @@
+import React, {useState} from 'react';
 import './css/Modal.css';
 
 const Modal = (props)=>{
 
     const state = props;
+    const [element, setElement] = useState('heat');
 
     const handler = (e)=>{
-        console.log(e);
+        setElement(e);
     }
 
     const TabControler = (props)=>{
@@ -38,7 +40,7 @@ const Modal = (props)=>{
     }
 
     const DencohSelector = (props)=>{
-        const components = props.table.map((dencoh) => (
+        const components = props.table.filter((e)=>{return (e.element == element)}).map((dencoh) => (
             <DencohFace name={dencoh.name_en} key={dencoh.name_en}/>
         ));
 
