@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 function Dencoh(props){
     return(
         <div className="dencoh">
-        <p onClick={props.handler}>{String(props.name)}</p>
+        <button onClick={props.handler}>{props.name}</button>
         </div>
     )
 }

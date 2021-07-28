@@ -46,22 +46,30 @@ function App() {
     };
 
     //編成に追加
-    const addFormation = (formationId, dencohName)=>{
-        let newArr = [...formations[formationId]];
-        newArr.push(dencohName);
-        console.log(newArr);
-        setFormations[formationId](newArr);
+    const addFormation = (dencohName)=>{
+        const newArr = [...formations[activeFormation]];
+        newArr[activeCar] = dencohName;
+        console.log(dencohName);
+        setFormations[activeFormation](newArr);
+        setShownState(false);
     };
+
+    //編成済み車両をクリックした際の処理
+    const clickFormedDencoh = (formId, carNumber)=>{
+        setActiveFormation(formId)
+        setActiveCar(carNumber);
+        setShownState(true);
+    }
 
     return (
         <div className="App">
         <p>ekidame - 駅メモ! ダメージ計算ツール</p>
         <Battle battler={battler} />
-        <Formation dencohs={formA} formId={0} handler={setActiveCar} />
-        <Formation dencohs={formB} formId={1} handler={setActiveCar} />
+        <Formation dencohs={formA} formId={0} handler={clickFormedDencoh} />
+        <Formation dencohs={formB} formId={1} handler={clickFormedDencoh} />
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal table={dencohTable} addFunc={addFormation} targetFormation={activeFormation} target={activeCar} shown={shownState}/>
+        <Modal table={dencohTable} addFunc={addFormation} shown={shownState}/>
         </div>
     );
 }

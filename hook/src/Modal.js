@@ -33,7 +33,7 @@ const Modal = (props)=>{
 
     const DencohFace = (props)=>{
         return(
-        <div className="dencoh-face" onClick={()=>{state.addFunc(0, props.name)}}>
+        <div className="dencoh-face" onClick={()=>{state.addFunc(props.name)}}>
             <img src={"img/face/"+props.name+".png"} className="dsm-face" alt={props.name}/>
         </div>
         );
