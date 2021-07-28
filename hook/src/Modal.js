@@ -34,13 +34,13 @@ const Modal = (props)=>{
     const DencohFace = (props)=>{
         return(
         <div className="dencoh-face" onClick={()=>{state.addFunc(0, props.name)}}>
-            <img src={"img/face/"+props.name+".png"} className="dsm-face"/>
+            <img src={"img/face/"+props.name+".png"} className="dsm-face" alt={props.name}/>
         </div>
         );
     }
 
     const DencohSelector = (props)=>{
-        const components = props.table.filter((e)=>{return (e.element == element)}).map((dencoh) => (
+        const components = props.table.filter((e)=>{return (e.element === element)}).map((dencoh) => (
             <DencohFace name={dencoh.name_en} key={dencoh.name_en}/>
         ));
 
@@ -51,13 +51,17 @@ const Modal = (props)=>{
         )
     }
 
-    return(
-        <div id="dencohSelectModal">
-        <ElementSelector />
-        <DencohSelector table={props.table}/>
-        <button>戻る</button>
-        </div>
-    );
+    if (props.shown === true){
+        return(
+            <div id="dencohSelectModal">
+            <ElementSelector />
+            <DencohSelector table={props.table}/>
+            <button>戻る</button>
+            </div>
+        )
+    }else{
+        return null;
+    }
 }
 
 export default Modal;

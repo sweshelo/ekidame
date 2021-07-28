@@ -7,22 +7,29 @@ import './App.css';
 function App() {
 
     //テンプレ
-    const TemplateFormation = [];
+    const TemplateFormation = [null, null, null, null, null, null, null];
     const TemplateBattler = [ 0, 0 ];
 
     //編成
-    var [formA, setFormA] = useState(TemplateFormation);
-    var [formB, setFormB] = useState(TemplateFormation);
-    var formations = [formA, formB];
-    var setFormations = [setFormA, setFormB];
+    const [formA, setFormA] = useState(TemplateFormation);
+    const [formB, setFormB] = useState(TemplateFormation);
+    const formations = [formA, formB];
+    const setFormations = [setFormA, setFormB];
 
     //アタッカー / ブロッカー
-    var [battler, setBattler] = useState(TemplateBattler);
+    const [battler, setBattler] = useState(TemplateBattler);
 
     //でんこ情報テーブル
-    var [dencohTable, setDencohTable] = useState([]);
+    const [dencohTable, setDencohTable] = useState([]);
 
-    var selectDencohWindow = false;
+    //操作対象の編成
+    const [activeFormation, setActiveFormation] = useState(0);
+
+    //捜査対象の車両
+    const [activeCar, setActiveCar] = useState(0);
+
+    //でんこ選択モーダルの表示 / 非表示
+    const [shownState, setShownState] = useState(false);
 
     //componentDidMount
     useEffect(()=> {
@@ -50,11 +57,11 @@ function App() {
         <div className="App">
         <p>ekidame - 駅メモ! ダメージ計算ツール</p>
         <Battle battler={battler} />
-        <Formation dencohs={formA} formId={0} />
-        <Formation dencohs={formB} formId={1} />
+        <Formation dencohs={formA} formId={0} handler={setActiveCar} />
+        <Formation dencohs={formB} formId={1} handler={setActiveCar} />
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal table={dencohTable} addFunc={addFormation}/>
+        <Modal table={dencohTable} addFunc={addFormation} targetFormation={activeFormation} target={activeCar} shown={shownState}/>
         </div>
     );
 }

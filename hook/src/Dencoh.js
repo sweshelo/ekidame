@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 
 function Dencoh(props){
     return(
-        <>
-        <p>{props.name}</p>
-        </>
+        <div className="dencoh">
+        <p onClick={props.handler}>{String(props.name)}</p>
+        </div>
     )
 }
 
