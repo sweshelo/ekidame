@@ -7,7 +7,7 @@ import './App.css';
 function App() {
 
     //テンプレ
-    const TemplateFormation = ['reto'];
+    const TemplateFormation = [];
     const TemplateBattler = [ 0, 0 ];
 
     //編成
@@ -52,8 +52,6 @@ function App() {
         <Battle battler={battler} />
         <Formation dencohs={formA} formId={0} />
         <Formation dencohs={formB} formId={1} />
-        <button onClick={()=>{addFormation(0, 'reto')}}>add reto</button>
-        <button onClick={()=>{addFormation(1, 'chizu')}}>add chizu</button>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
         <Modal table={dencohTable} addFunc={addFormation}/>
