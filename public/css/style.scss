@@ -1,0 +1,35 @@
+body{
+    font-size : 1.0em;
+    font-family : 'M PLUS Rounded 1c';
+    background : #f0f0f0;
+    text-align : center;
+}
+
+button{
+    background : #f4f4f4;
+    margin : 5px;
+    padding : 5px 10px 5px 10px;
+    text-align : center;
+    border-radius : 5px;
+    border : solid 2px white;
+    background-color : silver;
+    box-shadow : gray 0 0 4px;
+}
+
+.app{
+    width : 100%;
+    position : relative;
+
+}
+
+.smallest{
+    font-size : 0.5em;
+}
+
+.small{
+    font-size : 0.7em;
+}
+
+.hide{
+    display : none;
+}

@@ -1,0 +1,18 @@
+#dencohSelectModal {
+  position: relative;
+  width: 90%;
+  left: 5%; }
+  #dencohSelectModal #dsm-element {
+    overflow: hidden; }
+    #dencohSelectModal #dsm-element .element-radio {
+      display: none; }
+    #dencohSelectModal #dsm-element .element-tab {
+      float: left;
+      width: calc(100%/4);
+      padding: 4px 0; }
+  #dencohSelectModal .dsm-face {
+    float: left;
+    width: 50px;
+    border-radius: 50% 50% 50% 50%; }
+
+/*# sourceMappingURL=Modal.css.map */
