@@ -63,10 +63,12 @@ function App() {
 
     return (
         <div className="App">
-        <p>ekidame - 駅メモ! ダメージ計算ツール</p>
+        <nav>ekidame - 駅メモ! ダメージ計算ツール</nav>
         <Battle battler={battler} />
-        <Formation dencohs={formA} formId={0} handler={clickFormedDencoh} />
-        <Formation dencohs={formB} formId={1} handler={clickFormedDencoh} />
+        <div id="formations">
+            <Formation dencohs={formA} formId={0} handler={clickFormedDencoh} />
+            <Formation dencohs={formB} formId={1} handler={clickFormedDencoh} />
+        </div>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
         <Modal table={dencohTable} addFunc={addFormation} shown={shownState}/>
