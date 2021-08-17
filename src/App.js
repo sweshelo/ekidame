@@ -42,7 +42,7 @@ function App() {
 
     //編成をクリア
     const clearFormation = (formationId)=> {
-        setFormations[formationId]([]);
+        setFormations[formationId](TemplateFormation);
     };
 
     //編成に追加
