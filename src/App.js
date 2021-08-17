@@ -71,7 +71,7 @@ function App() {
         </div>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal table={dencohTable} addFunc={addFormation} shown={shownState}/>
+        <Modal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setShownState(false)}}shown={shownState}/>
         </div>
     );
 }

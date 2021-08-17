@@ -56,7 +56,7 @@ const Modal = (props)=>{
             <div id="dencohSelectModal">
             <ElementSelector />
             <DencohSelector table={props.table}/>
-            <button>戻る</button>
+            <button onClick={props.closeFunc}>戻る</button>
             </div>
         )
     }else{

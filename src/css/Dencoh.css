@@ -1,6 +1,11 @@
 .dencoh {
   margin: 5px 15px;
   height: 70px;
-  box-shadow: 0 0 4px gray; }
+  background-color: #fafafa;
+  box-shadow: 2px 2px 5px #a0a0a0; }
+
+.dencoh-form-face {
+  height: 100%;
+  float: right; }
 
 /*# sourceMappingURL=Dencoh.css.map */

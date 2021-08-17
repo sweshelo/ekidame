@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 *.png
-*/.sass-cache
+.sass-cache/
 *.css.map
