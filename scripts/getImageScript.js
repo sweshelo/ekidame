@@ -1,7 +1,7 @@
 const parseURL = (dencohName)=>{
-    const version = 'v=2021070901';
+    const version = 'v=2021080401';
     const wrapping = 'default';
-    const size = 'medium';
+    const size = 'large';
     const part = 'face';
     const emotion = 'smile';
     return (
