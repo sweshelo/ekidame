@@ -6,8 +6,20 @@ function Dencoh(props){
     if (props.name != null){
         image = <img src={"img/face/"+props.name+".png"} className="dencoh-form-face" alt={props.name}/>;
     }
+
+    const hundler = ()=>{
+        if(props.name == null){
+            props.handler()
+        }else{
+            alert()
+        }
+    };
+
     return(
-        <div className="dencoh" onClick={props.handler}>
+        // TODO
+        // 右側にステータスの要素を作って、それにonClickでprops.handlerを割り当てる
+        // でんこの画像には設定を変えるための関数をonClickで割り当てる
+        <div className="dencoh" onClick={hundler} >
         {image}
         {String(props.name)}
         </div>
