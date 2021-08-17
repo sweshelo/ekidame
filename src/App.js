@@ -48,9 +48,13 @@ function App() {
     //編成に追加
     const addFormation = (dencohName)=>{
         const newArr = [...formations[activeFormation]];
-        newArr[activeCar] = dencohName;
-        console.log(dencohName);
-        setFormations[activeFormation](newArr);
+        if (!newArr.includes(dencohName)){
+            newArr[activeCar] = dencohName;
+            console.log(dencohName);
+            setFormations[activeFormation](newArr);
+        }else{
+            alert('そのでんこは編成内に既に存在します。');
+        }
         setShownState(false);
     };
 
