@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Battle from './Battle';
 import Modal from './Modal';
 import Formation from './Formation';
+import './css/App.css';
 
 function App() {
 

@@ -9,7 +9,19 @@
 .dencoh-form-face {
   position: absolute;
   top: -5px;
-  left: 55px;
-  width: 75%; }
+  left: calc(110% - 120px);
+  width: 120px; }
+
+.dencoh-stats-panel {
+  padding: 3px 5px;
+  text-align: left; }
+  .dencoh-stats-panel .dencoh-stats-carnum {
+    font-size: 0.6em; }
+  .dencoh-stats-panel .dencoh-stats-name {
+    font-size: 0.8em;
+    font-weight: bold; }
+  .dencoh-stats-panel .dencoh-stats-element {
+    font-size: 0.6em;
+    padding: 3px 0px; }
 
 /*# sourceMappingURL=Dencoh.css.map */

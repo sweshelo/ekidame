@@ -23,9 +23,14 @@ const Dencoh = (props)=>{
 
     const Stats = ()=>{
         return(
-            <p>
-            --ここにでんこの日本語名--
-            </p>
+            <div className="dencoh-stats-panel">
+            <p className="dencoh-stats-carnum">n両目</p>
+            <p className="dencoh-stats-name">でんこ名</p>
+            <p className="dencoh-stats-element">flat</p>
+            <p className="dencoh-stats-status">AP999</p>
+            <p className="dencoh-stats-level">Lv80</p>
+            <p className="dencoh-stats-skill">skill activated</p>
+            </div>
         )
     }
 
@@ -34,7 +39,7 @@ const Dencoh = (props)=>{
         // 右側にステータスの要素を作って、それにonClickでprops.handlerを割り当てる
         // でんこの画像には設定を変えるための関数をonClickで割り当てる
         <div className="dencoh" onClick={hundler} >
-        <Stats className="dencoh-stats"/>
+        <Stats />
         <BackImage />
         </div>
     )
