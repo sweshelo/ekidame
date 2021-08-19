@@ -13,14 +13,6 @@ const Dencoh = (props)=>{
         }
     };
 
-    const hundler = ()=>{
-        if(props.name == null){
-            props.handler()
-        }else{
-            alert()
-        }
-    };
-
     const Stats = ()=>{
         return(
             <div className="dencoh-stats-panel">
@@ -35,10 +27,7 @@ const Dencoh = (props)=>{
     }
 
     return(
-        // TODO
-        // 右側にステータスの要素を作って、それにonClickでprops.handlerを割り当てる
-        // でんこの画像には設定を変えるための関数をonClickで割り当てる
-        <div className="dencoh" onClick={hundler} >
+        <div className="dencoh" onClick={props.handler} >
         <Stats />
         <BackImage />
         </div>
