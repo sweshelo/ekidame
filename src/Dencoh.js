@@ -24,7 +24,7 @@ const Dencoh = (props)=>{
     const Stats = ()=>{
         return(
             <div className="dencoh-stats-panel">
-            <p className="dencoh-stats-carnum">n両目</p>
+            <p className="dencoh-stats-carnum">{props.carNumber == 0 ? '先頭車両' : String(props.carNumber + 1)+'両目' }</p>
             <p className="dencoh-stats-name">でんこ名</p>
             <p className="dencoh-stats-element">flat</p>
             <p className="dencoh-stats-status">AP999</p>

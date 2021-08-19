@@ -3,7 +3,7 @@ import './css/formation.css'
 
 function Formation(props){
     const components = props.dencohs.map( (dencoh, index) => (
-        <Dencoh name={dencoh} id={dencoh} key={dencoh+index} handler={()=>{props.handler(props.formId, index)}}/>
+        <Dencoh name={dencoh} id={dencoh} key={dencoh+index} handler={()=>{props.handler(props.formId, index)}} carNumber={index}/>
     ));
     return (
         <div className="formation">
