@@ -29,7 +29,10 @@ function App() {
     const [activeCar, setActiveCar] = useState(0);
 
     //でんこ選択モーダルの表示 / 非表示
-    const [isModalShown, setModalShown] = useState(false);
+    const [isSelectModalShown, setSelectModalShownState] = useState(false);
+
+    //でんこ情報モーダルの表示 / 非表示
+    const [isInfoModalShown, setInfoModalShownState] = useState(false);
 
     //componentDidMount
     useEffect(()=> {
@@ -55,18 +58,19 @@ function App() {
         }else{
             alert('そのでんこは編成内に既に存在します。');
         }
-        setModalShown(false);
+        setSelectModalShownState(false);
     };
 
     //車両をクリックした際の処理
     const clickForm = (formId, carNumber)=>{
+        setActiveFormation(formId)
+        setActiveCar(carNumber);
         if (formations[formId][carNumber] == null){
             //車両が空の場合 : でんこを選択
-            setActiveFormation(formId)
-            setActiveCar(carNumber);
-            setModalShown(true);
+            setSelectModalShownState(true);
         }else{
             //TODO : 車両が空でない場合 : でんこを選択するか、でんこの設定を調整するか選択させる
+            setInfoModalShownState(true);
             alert(formations[formId][carNumber]);
         }
     }
@@ -76,12 +80,12 @@ function App() {
         <nav>ekidame - 駅メモ! ダメージ計算ツール</nav>
         <Battle battler={battler} />
         <div id="formations">
-            <Formation dencohs={formA} formId={0} handler={clickForm} />
-            <Formation dencohs={formB} formId={1} handler={clickForm} />
+        <Formation dencohs={formA} formId={0} handler={clickForm} />
+        <Formation dencohs={formB} formId={1} handler={clickForm} />
         </div>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setModalShown(false)}}shown={isModalShown}/>
+        <Modal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setSelectModalShownState(false)}}shown={isSelectModalShown}/>
         </div>
     );
 }
