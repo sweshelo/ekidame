@@ -16,13 +16,12 @@
       float: left;
       width: calc(100%/4);
       padding: 4px 0; }
-  #dencohSelectModal #dsm-body {
-    padding: 5px;
+  #dencohSelectModal #dsm-body #dsm-faces {
     overflow: hidden;
-    left: -50%; }
-    #dencohSelectModal #dsm-body .dsm-face {
+    padding-left: calc(((90% + 10px) / 7) / 2); }
+    #dencohSelectModal #dsm-body #dsm-faces .dsm-face {
       float: left;
-      width: 10%;
+      width: calc((90% + 10px) / 7);
       height: 10%;
       margin: 3px;
       padding: 3px;

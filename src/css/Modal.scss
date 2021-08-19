@@ -24,18 +24,20 @@
     }
 
     #dsm-body{
-        padding : 5px;
-        overflow : hidden;
-        left : -50%;
-        .dsm-face{
-            float : left;
-            width : 10%;
-            height : 10%;
-            margin : 3px;
-            padding : 3px;
-            border-radius : 50% 50% 50% 50%;
-            background-color : white;
-            box-shadow : 0 0 4px black;
+
+        #dsm-faces{
+            overflow : hidden;
+            padding-left : calc(((90% + 10px) / 7) / 2);
+            .dsm-face{
+                float : left;
+                width : calc((90% + 10px) / 7);
+                height : 10%;
+                margin : 3px;
+                padding : 3px;
+                border-radius : 50% 50% 50% 50%;
+                background-color : white;
+                box-shadow : 0 0 4px black;
+            }
         }
     }
 

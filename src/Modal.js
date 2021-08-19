@@ -46,7 +46,9 @@ const Modal = (props)=>{
 
         return(
             <div id="dsm-body">
+            <div id="dsm-faces">
             {components}
+            </div>
             </div>
         )
     }
