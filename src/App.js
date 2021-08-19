@@ -7,12 +7,25 @@ import './css/App.css';
 function App() {
 
     //テンプレ
-    const TemplateFormation = [null, null, null, null, null, null, null];
+    class Dencoh {
+        constructor(){
+            this.id = null;
+            this.name = null;
+            this.element = '';
+            this.ap = 0;
+            this.level = null;
+            this.atk = 0;
+            this.def = 0;
+            this.skill = false;
+            this.skillMethod = null;
+        }
+    };
+
     const TemplateBattler = [ 0, 0 ];
 
     //編成
-    const [formA, setFormA] = useState(TemplateFormation);
-    const [formB, setFormB] = useState(TemplateFormation);
+    const [formA, setFormA] = useState([ new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh() ]);
+    const [formB, setFormB] = useState([ new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh() ]);
     const formations = [formA, formB];
     const setFormations = [setFormA, setFormB];
 
@@ -43,21 +56,37 @@ function App() {
             });
     },[]);
 
+    //でんこデータ検索
+    const searchDencoh = (name)=>{
+        const max = dencohTable.length;
+        for(let i=0;i<max;i++){
+            if (dencohTable[i].name == name || dencohTable[i].name_en == name) return dencohTable[i];
+        }
+    };
+
     //編成をクリア
     const clearFormation = (formationId)=> {
-        setFormations[formationId](TemplateFormation);
+        setFormations[formationId]([ new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh(), new Dencoh() ]);
     };
 
     //編成に追加
     const addFormation = (dencohName)=>{
+        let includes = false;
         const newArr = [...formations[activeFormation]];
-        if (!newArr.includes(dencohName)){
-            newArr[activeCar] = dencohName;
-            console.log(dencohName);
+        newArr.forEach((d)=>{
+            if (d.id == dencohName) includes = true;
+        });
+        if (!includes){
+            const info = searchDencoh(dencohName);
+            console.log(info);
+            newArr[activeCar].id = info.name_en;
+            newArr[activeCar].name = info.name;
+            newArr[activeCar].element = info.element;
             setFormations[activeFormation](newArr);
         }else{
             alert('そのでんこは編成内に既に存在します。');
-        }
+        };
+        console.log(newArr)
         setSelectModalShownState(false);
     };
 
@@ -65,13 +94,13 @@ function App() {
     const clickForm = (formId, carNumber)=>{
         setActiveFormation(formId)
         setActiveCar(carNumber);
-        if (formations[formId][carNumber] == null){
+        if (formations[formId][carNumber].name == null){
             //車両が空の場合 : でんこを選択
             setSelectModalShownState(true);
         }else{
             //TODO : 車両が空でない場合 : でんこを選択するか、でんこの設定を調整するか選択させる
             setInfoModalShownState(true);
-            alert(formations[formId][carNumber]);
+            alert(formations[formId][carNumber].name);
         }
     };
 

@@ -4,9 +4,9 @@ import './css/Dencoh.css';
 const Dencoh = (props)=>{
 
     const BackImage = ()=>{
-        if (props.name != null){
+        if (props.id != null){
             return(
-                <img src={"img/slot/"+props.name+".png"} className="dencoh-form-face" alt={props.name}/>
+                <img src={"img/slot/"+props.id+".png"} className="dencoh-form-face" alt={props.name}/>
             );
         }else{
             return null;
@@ -17,11 +17,11 @@ const Dencoh = (props)=>{
         return(
             <div className="dencoh-stats-panel">
             <p className="dencoh-stats-carnum">{props.carNumber == 0 ? '先頭車両' : String(props.carNumber + 1)+'両目' }</p>
-            <p className="dencoh-stats-name">でんこ名</p>
-            <p className="dencoh-stats-element">flat</p>
-            <p className="dencoh-stats-status">AP999</p>
-            <p className="dencoh-stats-level">Lv80</p>
-            <p className="dencoh-stats-skill">skill activated</p>
+            <p className="dencoh-stats-name">{props.name}</p>
+            <p className="dencoh-stats-element">{props.element}</p>
+            <p className="dencoh-stats-status">{props.ap ? 'AP'+String(props.ap) : ''}</p>
+            <p className="dencoh-stats-level">{props.level ? 'Lv'+String(props.level) : ''}</p>
+            <p className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</p>
             </div>
         )
     }
