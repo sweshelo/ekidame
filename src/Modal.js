@@ -1,7 +1,16 @@
 import React, {useState} from 'react';
 import './css/Modal.css';
 
-const Modal = (props)=>{
+const InfoModal = (props)=>{
+    return(
+        <div className="dencohInfoModal">
+            <div className="dim-body">
+            </div>
+        </div>
+    )
+}
+
+const SelectModal = (props)=>{
 
     const state = props;
     const [element, setElement] = useState('heat');
@@ -66,4 +75,4 @@ const Modal = (props)=>{
     }
 }
 
-export default Modal;
+export {InfoModal, SelectModal};

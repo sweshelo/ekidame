@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Battle from './Battle';
-import Modal from './Modal';
+import {InfoModal, SelectModal} from './Modal.js';
 import Formation from './Formation';
 import './css/App.css';
 
@@ -73,6 +73,11 @@ function App() {
             setInfoModalShownState(true);
             alert(formations[formId][carNumber]);
         }
+    };
+
+    //でんこ情報モーダルでの変更値を受け取る関数
+    const recieveInfo = ()=>{
+        return 0;
     }
 
     return (
@@ -85,7 +90,8 @@ function App() {
         </div>
         <button onClick={()=>{clearFormation(0)}}>clear 1</button>
         <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <Modal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setSelectModalShownState(false)}}shown={isSelectModalShown}/>
+        <SelectModal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setSelectModalShownState(false)}}shown={isSelectModalShown}/>
+        <InfoModal table={dencohTable} handler={recieveInfo} closeFunc={()=>{setInfoModalShownState(false)}} shown={isInfoModalShown}/>
         </div>
     );
 }
