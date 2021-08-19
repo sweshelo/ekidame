@@ -12,19 +12,23 @@
     top : -5px;
     left : calc(100% - 100px);
     width : 120px;
+    z-index : 5;
 }
 
 .dencoh-stats-panel{
     padding : 3px 5px;
     text-align : left;
+    height : 70px;
 
     .dencoh-stats-carnum{
-        font-size : 0.6em;
+        font-size : 0.55em;
+        color : gray;
     }
 
     .dencoh-stats-name{
         font-size : 0.8em;
         font-weight : bold;
+        padding : 2px 0px;
     }
 
     .dencoh-stats-element{
@@ -32,4 +36,26 @@
         padding : 3px 0px;
     }
 
+}
+
+.dencoh-stats-allow{
+    position : absolute;
+    top : calc(100% - 22px);
+    width : 100%;
+    background-color : gray;
+    clip-path: polygon(10% 0, 100% 0%, 100% 100%, 5% 100%);
+    z-index : 1;
+
+    .dencoh-stats-level{
+        text-align : left;
+        padding : 10px 3px 0 0;
+        font-size : 0.75em;
+    }
+
+    .dencoh-stats-skill{
+        font-size : 0.55em;
+        background : white;
+        padding : 2px;
+        z-index : 10;
+    }
 }

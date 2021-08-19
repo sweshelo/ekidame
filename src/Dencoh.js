@@ -20,8 +20,6 @@ const Dencoh = (props)=>{
             <p className="dencoh-stats-name">{props.name}</p>
             <p className="dencoh-stats-element">{props.element}</p>
             <p className="dencoh-stats-status">{props.ap ? 'AP'+String(props.ap) : ''}</p>
-            <p className="dencoh-stats-level">{props.level ? 'Lv'+String(props.level) : ''}</p>
-            <p className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</p>
             </div>
         )
     }
@@ -30,6 +28,9 @@ const Dencoh = (props)=>{
         <div className="dencoh" onClick={props.handler} >
         <Stats />
         <BackImage />
+        <div className="dencoh-stats-allow">
+        <span className="dencoh-stats-level">{props.level ? 'Lv'+String(props.level) : ''}</span><span className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</span>
+        </div>
         </div>
     )
 }

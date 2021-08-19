@@ -82,6 +82,7 @@ function App() {
             newArr[activeCar].id = info.name_en;
             newArr[activeCar].name = info.name;
             newArr[activeCar].element = info.element;
+            newArr[activeCar].skill = true;
             setFormations[activeFormation](newArr);
         }else{
             alert('そのでんこは編成内に既に存在します。');
