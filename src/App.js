@@ -83,6 +83,7 @@ function App() {
             newArr[activeCar].name = info.name;
             newArr[activeCar].element = info.element;
             newArr[activeCar].skill = true;
+            newArr[activeCar].level = 80;
             setFormations[activeFormation](newArr);
         }else{
             alert('そのでんこは編成内に既に存在します。');

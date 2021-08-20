@@ -4,6 +4,7 @@
   left: calc((100% - (90% + 20px)) /2);
   top: calc(10%);
   padding: 5px;
+  z-index: 20;
   background: #fafafa;
   box-shadow: 0 0 4px gray;
   border-radius: 8px; }

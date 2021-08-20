@@ -30,19 +30,31 @@
 
 .dencoh-stats-allow {
   position: absolute;
-  top: calc(100% - 22px);
+  top: calc(100% - 20px);
   width: 100%;
-  background-color: gray;
+  height: 16px;
   clip-path: polygon(10% 0, 100% 0%, 100% 100%, 5% 100%);
   z-index: 1; }
-  .dencoh-stats-allow .dencoh-stats-level {
+
+.dencoh-stats-on-allow {
+  overflow: hidden;
+  position: absolute;
+  top: calc(100% - 18px);
+  width: 100%;
+  z-index: 11; }
+  .dencoh-stats-on-allow .dencoh-stats-level {
     text-align: left;
-    padding: 10px 3px 0 0;
-    font-size: 0.75em; }
-  .dencoh-stats-allow .dencoh-stats-skill {
-    font-size: 0.55em;
+    font-size: 0.75em;
+    float: left;
+    margin-left: calc(12%);
+    padding-bottom: 1px; }
+  .dencoh-stats-on-allow .dencoh-stats-skill {
+    float: right;
+    margin-top: 1px;
+    margin-right: calc(3px);
+    font-size: 0.5em;
     background: white;
-    padding: 2px;
-    z-index: 10; }
+    padding: 0px 4px;
+    border-radius: 4px; }
 
 /*# sourceMappingURL=Dencoh.css.map */
