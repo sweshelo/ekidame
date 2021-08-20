@@ -28,9 +28,9 @@ const Dencoh = (props)=>{
         <div className="dencoh" onClick={props.handler} >
         <Stats />
         <BackImage />
-        <div className={"dencoh-stats-allow is-color-"+props.color}></div>
-        <div className="dencoh-stats-on-allow dasher">
-        <div className={"dencoh-stats-level"}><span className="ds-level">{props.level ? 'Lv. ' : ''}</span><span className="ds-value">{String(props.level)}</span></div><div className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</div>
+        <div className={"dencoh-stats-arrow is-color-"+props.color}></div>
+        <div className="dencoh-stats-on-arrow dasher">
+        <div className={"dencoh-stats-level"}><span className="ds-level">{props.level ? 'Lv. ' : ''}</span><span className="ds-value">{String(props.level)}</span></div><div className="dencoh-stats-skill">{props.skill ? 'Skill activated' : ''}</div>
         </div>
         </div>
     )

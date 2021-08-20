@@ -28,7 +28,7 @@
     font-size: 0.6em;
     padding: 3px 0px; }
 
-.dencoh-stats-allow {
+.dencoh-stats-arrow {
   position: absolute;
   top: calc(100% - 20px);
   width: 100%;
@@ -87,24 +87,24 @@
 .is-char-gold {
   color: #ceb35f; }
 
-.dencoh-stats-on-allow {
+.dencoh-stats-on-arrow {
   overflow: hidden;
   position: absolute;
   top: calc(100% - 21px);
   width: 100%;
   z-index: 11; }
-  .dencoh-stats-on-allow .dencoh-stats-level {
+  .dencoh-stats-on-arrow .dencoh-stats-level {
     text-align: left;
     color: white;
     float: left;
     margin-left: calc(12%);
     padding-bottom: 1px; }
-    .dencoh-stats-on-allow .dencoh-stats-level .ds-level {
+    .dencoh-stats-on-arrow .dencoh-stats-level .ds-level {
       font-size: 0.55em; }
-    .dencoh-stats-on-allow .dencoh-stats-level .ds-value {
+    .dencoh-stats-on-arrow .dencoh-stats-level .ds-value {
       font-weight: bold;
       font-size: 0.8em; }
-  .dencoh-stats-on-allow .dencoh-stats-skill {
+  .dencoh-stats-on-arrow .dencoh-stats-skill {
     float: right;
     margin-top: 4px;
     margin-right: calc(3px);
