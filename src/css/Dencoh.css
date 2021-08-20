@@ -90,20 +90,23 @@
 .dencoh-stats-on-allow {
   overflow: hidden;
   position: absolute;
-  top: calc(100% - 18px);
+  top: calc(100% - 21px);
   width: 100%;
   z-index: 11; }
   .dencoh-stats-on-allow .dencoh-stats-level {
     text-align: left;
-    font-size: 0.75em;
-    font-weight: bold;
     color: white;
     float: left;
     margin-left: calc(12%);
     padding-bottom: 1px; }
+    .dencoh-stats-on-allow .dencoh-stats-level .ds-level {
+      font-size: 0.55em; }
+    .dencoh-stats-on-allow .dencoh-stats-level .ds-value {
+      font-weight: bold;
+      font-size: 0.8em; }
   .dencoh-stats-on-allow .dencoh-stats-skill {
     float: right;
-    margin-top: 1px;
+    margin-top: 4px;
     margin-right: calc(3px);
     font-size: 0.5em;
     background: white;
