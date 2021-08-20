@@ -84,6 +84,7 @@ function App() {
             newArr[activeCar].element = info.element;
             newArr[activeCar].skill = true;
             newArr[activeCar].level = 80;
+            newArr[activeCar].color = (info.theme_color != null ? info.theme_color : 'gray');
             setFormations[activeFormation](newArr);
         }else{
             alert('そのでんこは編成内に既に存在します。');

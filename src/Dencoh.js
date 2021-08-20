@@ -17,7 +17,7 @@ const Dencoh = (props)=>{
         return(
             <div className="dencoh-stats-panel">
             <p className="dencoh-stats-carnum">{props.carNumber == 0 ? '先頭車両' : String(props.carNumber + 1)+'両目' }</p>
-            <p className="dencoh-stats-name">{props.name}</p>
+            <p className={"dencoh-stats-name is-char-"+props.color}>{props.name}</p>
             <p className="dencoh-stats-element">{props.element}</p>
             <p className="dencoh-stats-status">{props.ap ? 'AP'+String(props.ap) : ''}</p>
             </div>
@@ -28,9 +28,9 @@ const Dencoh = (props)=>{
         <div className="dencoh" onClick={props.handler} >
         <Stats />
         <BackImage />
-        <div className={"dencoh-stats-allow allow-gray"}></div>
+        <div className={"dencoh-stats-allow is-color-"+props.color}></div>
         <div className="dencoh-stats-on-allow">
-        <div className="dencoh-stats-level">{props.level ? 'Lv'+String(props.level) : ''}</div><div className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</div>
+        <div className={"dencoh-stats-level"}>{props.level ? 'Lv. '+String(props.level) : ''}</div><div className="dencoh-stats-skill">{props.skill ? 'skill activated' : ''}</div>
         </div>
         </div>
     )
