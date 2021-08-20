@@ -13,12 +13,25 @@ const Dencoh = (props)=>{
         }
     };
 
+    const Element = ()=>{
+        if (props.element){
+            return(
+                <div className="dencoh-stats-element">
+                <img className={"dse-img"} src={"/img/icon_denco_"+props.element+".png"} />
+                <span className={"dse-txt dasher is-element-"+props.element}>{props.element}</span>
+                </div>
+            )
+        } else {
+            return null;
+        };
+    }
+
     const Stats = ()=>{
         return(
             <div className="dencoh-stats-panel">
             <p className="dencoh-stats-carnum">{props.carNumber == 0 ? '先頭車両' : String(props.carNumber + 1)+'両目' }</p>
             <p className={"dencoh-stats-name is-char-"+props.color}>{props.name}</p>
-            <p className="dencoh-stats-element dasher">{props.element}</p>
+            <Element />
             <p className="dencoh-stats-status dasher">{props.ap ? 'AP'+String(props.ap) : ''}</p>
             </div>
         )

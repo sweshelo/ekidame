@@ -23,10 +23,12 @@
   .dencoh-stats-panel .dencoh-stats-name {
     font-size: 0.8em;
     font-weight: bold;
-    padding: 2px 0px; }
-  .dencoh-stats-panel .dencoh-stats-element {
+    padding-top: 2px; }
+  .dencoh-stats-panel .dencoh-stats-element .dse-img {
+    width: 0.8em; }
+  .dencoh-stats-panel .dencoh-stats-element .dse-txt {
     font-size: 0.6em;
-    padding: 3px 0px; }
+    margin-left: 2px; }
 
 .dencoh-stats-arrow {
   position: absolute;
@@ -41,9 +43,6 @@
 
 .is-char-red {
   color: #ff122e; }
-
-.is-color-blue {
-  background-color: #0170c1; }
 
 .is-color-orange {
   background-color: #ff9656; }
@@ -86,6 +85,18 @@
 
 .is-char-gold {
   color: #ceb35f; }
+
+.is-element-heat {
+  color: #ff122e; }
+
+.is-element-eco {
+  color: #15ad23; }
+
+.is-element-cool {
+  color: #0170c1; }
+
+.is-element-flat {
+  color: #41403d; }
 
 .dencoh-stats-on-arrow {
   overflow: hidden;
