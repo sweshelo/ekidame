@@ -16,7 +16,8 @@
 .dencoh-stats-panel {
   padding: 3px 5px;
   text-align: left;
-  height: 70px; }
+  height: 70px;
+  position: relative; }
   .dencoh-stats-panel .dencoh-stats-carnum {
     font-size: 0.55em;
     color: gray; }
@@ -24,11 +25,16 @@
     font-size: 0.8em;
     font-weight: bold;
     padding-top: 2px; }
-  .dencoh-stats-panel .dencoh-stats-element .dse-img {
-    width: 0.8em; }
-  .dencoh-stats-panel .dencoh-stats-element .dse-txt {
-    font-size: 0.6em;
-    margin-left: 2px; }
+  .dencoh-stats-panel .dencoh-stats-element {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 25px; }
+    .dencoh-stats-panel .dencoh-stats-element .dse-img {
+      width: 0.75em; }
+    .dencoh-stats-panel .dencoh-stats-element .dse-txt {
+      font-size: 0.55em;
+      margin-left: 2px; }
 
 .dencoh-stats-arrow {
   position: absolute;

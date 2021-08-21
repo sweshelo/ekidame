@@ -19,6 +19,7 @@
     padding : 3px 5px;
     text-align : left;
     height : 70px;
+    position : relative;
 
     .dencoh-stats-carnum{
         font-size : 0.55em;
@@ -32,11 +33,15 @@
     }
 
     .dencoh-stats-element{
+        position : absolute;
+        margin : 0;
+        padding : 0;
+        top : 25px;
         .dse-img{
-            width : 0.8em;
+            width : 0.75em;
         }
         .dse-txt{
-            font-size : 0.6em;
+            font-size : 0.55em;
             margin-left : 2px;
         }
     }
