@@ -107,7 +107,7 @@
 .dencoh-stats-on-arrow {
   overflow: hidden;
   position: absolute;
-  top: calc(100% - 21px);
+  top: calc(100% - 22px);
   width: 100%;
   z-index: 11; }
   .dencoh-stats-on-arrow .dencoh-stats-level {
@@ -115,7 +115,7 @@
     color: white;
     float: left;
     margin-left: calc(12%);
-    padding-bottom: 1px; }
+    padding-top: 1px; }
     .dencoh-stats-on-arrow .dencoh-stats-level .ds-level {
       font-size: 0.5em; }
     .dencoh-stats-on-arrow .dencoh-stats-level .ds-value {
@@ -126,7 +126,7 @@
     margin-right: calc(3px);
     font-size: 0.5em;
     background: white;
-    padding: 0px 4px;
+    padding: 1px 4px;
     border-radius: 2px; }
 
 /*# sourceMappingURL=Dencoh.css.map */

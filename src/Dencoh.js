@@ -43,7 +43,7 @@ const Dencoh = (props)=>{
         <BackImage />
         <div className={"dencoh-stats-arrow is-color-"+props.color}></div>
         <div className="dencoh-stats-on-arrow dasher">
-        <div className={"dencoh-stats-level"}><span className="ds-level">{props.level ? 'Lv. ' : ''}</span><span className="ds-value">{(props.level ? props.level : '')}</span></div><div className="dencoh-stats-skill">{props.skill ? 'Skill activated' : ''}</div>
+        <div className={"dencoh-stats-level"}><span className="ds-level">{props.level ? 'Lv. ' : ''}</span><span className={"ds-value"}>{(props.level ? props.level : '')}</span></div><div className={"dencoh-stats-skill is-char-"+props.color}>{props.skill ? 'Skill activated' : ''}</div>
         </div>
         </div>
     )
