@@ -1,11 +1,12 @@
 const parseURL = (dencohName)=>{
     const version = 'v=2021102601';
     const wrapping = 'default';
-    const size = 'large';
-    const part = 'face';
-    const emotion = 'smile';
+    const size = 'small';
+    const part = 'slot';
+    const emotion = 'usual';
     return (
-        "https://static.ekimemo.com/"+version+"/img/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png"
+        "https://static.ekimemo.com/"+version+"/portal/img/common/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png"
+        //https://static.ekimemo.com/v=2021102601/portal/img/common/partner/dencoh/default/small/slot_usual.png
     )
 }
 
