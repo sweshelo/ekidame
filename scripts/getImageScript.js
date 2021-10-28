@@ -1,22 +1,14 @@
 const parseURL = (dencohName, isOurMemo)=>{
     const version = 'v=2021102601';
 
-    let wrapping = 'default';
-    let size = 'large';
-    let part = 'face';
-    let emotion = 'smile';
+    const wrapping = 'default';
+    const size = 'large';
+    const part = 'face';
+    const emotion = 'smile';
 
-    let URL = '';
+    const domain = (isOurMemo == true) ? "static.game.our-rails.ekimemo.com" : "static.native.denco.social.mfac.jp";
 
-    if (isOurMemo == true){
-        URL = "https://static.game.our-rails.ekimemo.com/"+version+"/img/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
-    }else{
-        size    = 'small';
-        emotion = 'usual';
-        URL  = "https://static.ekimemo.com/"+version+"/portal/img/common/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
-    }
-
-    return URL;
+    return "https://"+domain+"/"+version+"/img/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
 }
 
 const main = async ()=>{
