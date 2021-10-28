@@ -14,6 +14,8 @@ const parseURL = (dencohName, isOurMemo)=>{
         size = 'small';
         URL  = "https://static.ekimemo.com/"+version+"/portal/img/common/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
     }
+
+    return URL;
 }
 
 const main = async ()=>{
