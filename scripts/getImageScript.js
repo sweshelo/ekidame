@@ -11,7 +11,8 @@ const parseURL = (dencohName, isOurMemo)=>{
     if (isOurMemo == true){
         URL = "https://static.game.our-rails.ekimemo.com/"+version+"/img/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
     }else{
-        size = 'small';
+        size    = 'small';
+        emotion = 'usual';
         URL  = "https://static.ekimemo.com/"+version+"/portal/img/common/partner/"+dencohName+"/"+wrapping+"/"+size+"/"+part+"_"+emotion+".png";
     }
 
