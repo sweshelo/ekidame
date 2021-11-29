@@ -114,16 +114,16 @@ function App() {
 
     return (
         <div className="App">
-        <nav>ekidame - 駅メモ! ダメージ計算ツール</nav>
-        <Battle battler={battler} />
-        <div id="formations">
-        <Formation dencohs={formA} formId={0} handler={clickForm} />
-        <Formation dencohs={formB} formId={1} handler={clickForm} />
-        </div>
-        <button onClick={()=>{clearFormation(0)}}>clear 1</button>
-        <button onClick={()=>{clearFormation(1)}}>clear 2</button>
-        <SelectModal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setSelectModalShownState(false)}}shown={isSelectModalShown}/>
-        <InfoModal table={dencohTable} handler={recieveInfo} closeFunc={()=>{setInfoModalShownState(false)}} shown={isInfoModalShown}/>
+            <nav>ekidame - 駅メモ! ダメージ計算ツール</nav>
+            <Battle battler={battler} formations={formations}/>
+            <div id="formations">
+                <Formation dencohs={formA} formId={0} handler={clickForm} />
+                <Formation dencohs={formB} formId={1} handler={clickForm} />
+            </div>
+            <button onClick={()=>{clearFormation(0)}}>clear 1</button>
+            <button onClick={()=>{clearFormation(1)}}>clear 2</button>
+            <SelectModal table={dencohTable} addFunc={addFormation} closeFunc={()=>{setSelectModalShownState(false)}}shown={isSelectModalShown}/>
+            <InfoModal table={dencohTable} handler={recieveInfo} closeFunc={()=>{setInfoModalShownState(false)}} shown={isInfoModalShown}/>
         </div>
     );
 }
